@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Vision {
 
-  private apiKey = "AIzaSyAxtYY-XwspbDUGYF21aqSlFxTnI8EGzbw";
-  private VISION_ENDPOINT = "https://vision.googleapis.com/v1/images:annotate?key=" + this.apiKey;
+  private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAxtYY-XwspbDUGYF21aqSlFxTnI8EGzbw';
   private FEATURE_TYPE: string[] = [
     'TYPE_UNSPECIFIED',
     'FACE_DETECTION',
@@ -18,8 +17,10 @@ export class Vision {
     'IMAGE_PROPERTIES'
   ];
   private obs$: EventEmitter<string[]>;
+  private visionEndpoint: string;
 
   constructor(private http: Http) {
+
     this.obs$ = new EventEmitter<string[]>();
   }
 
@@ -35,7 +36,6 @@ export class Vision {
         }]
       }]
     };
-
     this.post(request);
   }
 
@@ -56,17 +56,12 @@ export class Vision {
       );
   }
 
-  private processMetadata(data: any){
-    data = data.responses
+  private processMetadata(data: any) {
+    data = (data.responses||[])
       .map( (arg) => arg.labelAnnotations)
       .map( (arg) => (arg||[]).map( o => o.description ))
     data = <string[]>([].concat.apply([], data));
 
-    if(data.length > 0) {
-      this.obs$.emit(data);
-    }
-    else {
-      this.obs$.emit([]);
-    }
+    this.obs$.emit(data);
   }
 }
