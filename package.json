@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "build": "ionic build browser",
+    "git-push": "git push origin master",
+    "surge": "surge www",
+    "deploy": "npm run build && npm run git-push && npm run surge"
+  },
   "dependencies": {
     "angular2": "2.0.0-beta.15",
     "es6-shim": "^0.35.0",
@@ -34,6 +40,6 @@
       "locator": "ios"
     }
   ],
-  "name": "angularattack-tmp2",
-  "description": "angularattack-tmp2: An Ionic project"
+  "name": "letmesee",
+  "description": "angularattack: Let Me See"
 }
