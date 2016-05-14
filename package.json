@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "build": "ionic build browser",
+    "build": "ionic build browser && npm run sw-precache",
     "git-push": "git push origin master",
     "surge": "surge www",
+    "sw-precache": "node_modules/.bin/sw-precache --config=sw-precache-config.json --verbose",
     "deploy": "npm run build && npm run git-push && npm run surge"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "ionic-gulp-sass-build": "^1.0.0",
     "ionic-gulp-scripts-copy": "^1.0.1",
     "run-sequence": "1.1.5",
+    "sw-precache": "git+https://github.com/manekinekko/sw-precache.git",
     "tslint": "^3.10.2",
     "typings": "^0.8.1"
   },
@@ -35,14 +37,7 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [
-    "ios",
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
-  ],
+  "cordovaPlatforms": [],
   "name": "letmesee",
   "description": "angularattack: Let Me See"
 }
