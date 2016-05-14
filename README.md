@@ -1,3 +1,18 @@
+### TEAM
+
+## test locally
+
+```
+$ ionic serve --address localhost
+```
+
+## Deploy to surge
+
+```
+$ cd angularattack2016-angularlabs/
+$ surge www
+```
+
 # This is your [AngularAttack](https://www.angularattack.com) 2016 Repo
 
 This repo is the start of your AngularAttack 2016 entry. It contains the simple [Angular2 starter](https://angular.io/docs/ts/latest/quickstart.html) files.
@@ -45,4 +60,3 @@ If you receive an error message `"You do not have permission to publish to angul
 ### Step 4) Wait til competition starts
 
 It begins at exactly [May 14 at 00:00 UTC](https://www.wolframalpha.com/input/?i=May+14,+2016+0:00+UTC). Once the competition starts,   you can write over this project.
-
