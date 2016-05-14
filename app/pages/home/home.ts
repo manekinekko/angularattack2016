@@ -1,13 +1,14 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
+
+import {Vibration} from 'ionic-native';
+
 import {CommandOption} from 'annyang';
+
 import {Vision, FEATURE_TYPE} from '../../services/vision';
 import {ResponsiveVoice} from '../../services/responsive-voice';
 
-
-const WELCOME_TEXT: string = `
-Hi. How can I help you?
-`;
+const WELCOME_TEXT: string = `Hi. How can I help you?`;
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
@@ -31,20 +32,28 @@ export class HomePage {
 
     // Let's define our command.
     let commands: CommandOption = {
+
+      // Describe
       'let me see': this.describeWhatISee.bind(this),
       'show me': this.describeWhatISee.bind(this),
       'describe what do you see': this.describeWhatISee.bind(this),
+
+      // Facial
       'how do I look': this.describeFacial.bind(this)
     };
 
+    // Turn voice service into listening mode
     this.voiceService.listen(commands, WELCOME_TEXT);
+    
+    // Vibration notification
+    Vibration.vibrate(500);
 
     this.vision.onResults().subscribe(
       (data) => {
         let text = '';
-        if(data.labels) {
+        if (data.labels) {
           text = `I see, ${data.labels.join(', ')}`;
-          if(data.labels.length === 0) {
+          if (data.labels.length === 0) {
             text = `Sorry! I could not recognize what I see.`;
           }
         }
@@ -97,8 +106,8 @@ export class HomePage {
   }
 
   private describeFacial() {
-    //this.say('Sorry! Facial expressions are not yet implemented.');
-    this.vision.process(this.getBase64(), FEATURE_TYPE.FACE_DETECTION);
+    this.voiceService.say('Ok. let me guess.');
+    setTimeout(this.vision.process(this.getBase64(), FEATURE_TYPE.FACE_DETECTION), 1000);
   }
 
   private describeWhatISee() {
