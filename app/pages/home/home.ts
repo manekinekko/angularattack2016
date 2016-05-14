@@ -32,8 +32,11 @@ export class HomePage {
   ) { }
 
   ngOnInit() {
+
     this.listen();
+
     responsiveVoice.OnVoiceReady = () => {
+      responsiveVoice.setDefaultVoice('US English Female');
       this.speak();
     };
 
@@ -92,6 +95,7 @@ export class HomePage {
     let commands: annyang.CommandOption = {
       'let me see': this.describeWhatISee.bind(this),
       'show me': this.describeWhatISee.bind(this),
+      'describe what do you see': this.describeWhatISee.bind(this),
       'how do I look': this.describeFacial.bind(this)
     };
 
