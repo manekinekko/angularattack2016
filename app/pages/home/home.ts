@@ -1,17 +1,17 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
-import * as annyang from 'annyang';
+import {CommandOption} from 'annyang';
 import {Vision, FEATURE_TYPE} from '../../services/vision';
+import {ResponsiveVoice} from '../../services/responsive-voice';
 
-declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
-    Hi. How can I help you?
-  `;
+Hi. How can I help you?
+`;
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
-  providers: [Vision]
+  providers: [Vision, ResponsiveVoice]
 })
 export class HomePage {
 
@@ -23,21 +23,21 @@ export class HomePage {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer,
-    private vision: Vision
+    private vision: Vision,
+    private voiceService: ResponsiveVoice
   ) { }
 
   ngOnInit() {
 
-    this.listen();
+    // Let's define our command.
+    let commands: CommandOption = {
+      'let me see': this.describeWhatISee.bind(this),
+      'show me': this.describeWhatISee.bind(this),
+      'describe what do you see': this.describeWhatISee.bind(this),
+      'how do I look': this.describeFacial.bind(this)
+    };
 
-
-    if('responsiveVoice' in window) {
-      responsiveVoice.OnVoiceReady = () => {
-        responsiveVoice.setDefaultVoice('US English Female');
-        setTimeout(this.say(WELCOME_TEXT), 4000);
-      };
-    }
-
+    this.voiceService.listen(commands, WELCOME_TEXT);
 
     this.vision.onResults().subscribe(
       (data) => {
@@ -52,7 +52,7 @@ export class HomePage {
           text = `Sorry! I am not able to give an answer. Please try later.`;
         }
 
-        this.say(text);
+        this.voiceService.say(text);
       },
       (err) => console.error(err),
       () => console.log('done')
@@ -96,38 +96,18 @@ export class HomePage {
 
   }
 
-  private listen() {
-    // Let's define a command.
-    let commands: annyang.CommandOption = {
-      'show me': this.describeWhatISee.bind(this),
-      'what do you see': this.describeWhatISee.bind(this),
-      'how do I look': this.describeFacial.bind(this)
-    };
-
-    // Add our commands to annyang
-    annyang.addCommands(commands);
-
-    // Start listening.
-    annyang.start({continuous: true});
-  }
-
   private describeFacial() {
     //this.say('Sorry! Facial expressions are not yet implemented.');
     this.vision.process(this.getBase64(), FEATURE_TYPE.FACE_DETECTION);
   }
 
   private describeWhatISee() {
-    this.say('Ok. let me check that for you.');
+    this.voiceService.say('Ok. let me check that for you.');
     setTimeout(this.vision.process(this.getBase64()), 1000);
   }
 
   private getBase64() {
     return this.nativeCanvas.toDataURL();
-  }
-
-  private say(text: string) {
-    responsiveVoice.cancel();
-    responsiveVoice.speak(text);
   }
 
 }
