@@ -1,5 +1,8 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
+
+import {Vibration} from 'ionic-native';
+
 import {CommandOption} from 'annyang';
 import {Vision, FEATURE_TYPE} from '../../services/vision';
 import {ResponsiveVoice} from '../../services/responsive-voice';
@@ -38,6 +41,9 @@ export class HomePage {
     };
 
     this.voiceService.listen(commands, WELCOME_TEXT);
+    
+    // Vibration notification
+    Vibration.vibrate(500);
 
     this.vision.onResults().subscribe(
       (data) => {
