@@ -16,7 +16,7 @@ export class HomePage {
   @ViewChild('canvas') canvas;
   @ViewChild('video') video;
 
-  private TEXT: string = `
+  const TEXT: string = `
     Welcom. Please use your voice to interact with me.
     Say "let me see" and I will tell you what I see.
     Say "how do I look" and I will tell you how do you look.
