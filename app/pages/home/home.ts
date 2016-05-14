@@ -75,6 +75,9 @@ export class HomePage {
       var commands = {
         'let me see': () => {
           this.say('The cloud vision API is not yet implemented.');
+        },
+        'how do I look': () => {
+          this.say('Facial expressions are not yet implemented.');
         }
       };
 
