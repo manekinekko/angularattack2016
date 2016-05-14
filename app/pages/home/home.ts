@@ -6,7 +6,7 @@ import {Vision} from '../../services/vision';
 declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
-    ${ !(((Math.random()*99)|0)%2) ? 'Welcom':'Hi' }.
+    ${ !(((Math.random()*99)|0)%2) ? 'Welcome':'Hi' }.
     Please use your voice to interact with me.
   `;
 
