@@ -8,10 +8,12 @@
 </ion-navbar>
 
 <ion-content class="home">
-  <ion-card>
+  <ion-card [style.width.px]="canvas.width">
+
     <ion-card-content class="card">
-      <canvas width='100' height='100' #canvas></canvas>
-      <video #video preload='auto' autoplay></video>
+      <canvas width='1280' height='720' #canvas></canvas>
+      <video width='1280' height='720' #video preload='auto' autoplay></video>
     </ion-card-content>
+
   </ion-card>
 </ion-content>
