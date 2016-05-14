@@ -4,6 +4,12 @@ import {Page} from 'ionic-angular';
 declare var annyang;
 declare var responsiveVoice;
 
+const WELCOME_TEXT: string = `
+    Welcom. Please use your voice to interact with me.
+    Say "let me see" and I will tell you what I see.
+    Say "how do I look" and I will tell you how do you look.
+  `;
+
 @Page({
   templateUrl: 'build/pages/home/home.html',
   styles: [`
@@ -16,16 +22,10 @@ export class HomePage {
   @ViewChild('canvas') canvas;
   @ViewChild('video') video;
 
-  const TEXT: string = `
-    Welcom. Please use your voice to interact with me.
-    Say "let me see" and I will tell you what I see.
-    Say "how do I look" and I will tell you how do you look.
-  `;
-
   constructor(
     elementRef: ElementRef,
     renderer: Renderer
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.listen();
@@ -36,11 +36,11 @@ export class HomePage {
 
   ngAfterViewInit() {
 
-    window.URL = window.URL || (<any>window).webkitURL ;
+    window.URL = window.URL || (<any>window).webkitURL;
     (<any>navigator).getUserMedia = (<any>navigator).getUserMedia || (<any>navigator).webkitGetUserMedia;
 
-    if((<any>navigator).getUserMedia){
-      (<any>navigator).getUserMedia({video: true},
+    if ((<any>navigator).getUserMedia) {
+      (<any>navigator).getUserMedia({ video: true },
         (stream) => {
           video.src = window.URL.createObjectURL(stream);
         },
@@ -59,11 +59,11 @@ export class HomePage {
     let canvas = this.canvas.nativeElement;
     let context = canvas.getContext('2d');
     let vw, vh;
-    video.addEventListener('loadedmetadata', function() {
-        vw = this.videoWidth || this.width;
-        vh = this.videoHeight || this.height;
-        canvas.width = Math.min(window.innerWidth, vw);
-        canvas.height = vh;
+    video.addEventListener('loadedmetadata', function () {
+      vw = this.videoWidth || this.width;
+      vh = this.videoHeight || this.height;
+      canvas.width = Math.min(window.innerWidth, vw);
+      canvas.height = vh;
     }, false);
     video.addEventListener('play', draw, false);
 
@@ -95,7 +95,7 @@ export class HomePage {
 
   private speak() {
     setTimeout(
-      this.say(this.TEXT)
-    , 2000);
+      this.say(WELCOME_TEXT)
+      , 2000);
   }
 }
