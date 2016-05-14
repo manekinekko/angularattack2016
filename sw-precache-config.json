@@ -1,0 +1,16 @@
+{
+  "swFile": "www/sw.js",
+  "staticFileGlobs": [
+    "www/manifest.json",
+    "www/**/*.css",
+    "www/**/*.{ttf,woff,woff2,eof}",
+    "www/**/*.js",
+    "www/**/*.html",
+    "www/**/*.{png,jpg,gif,svg}",
+    "https://code.responsivevoice.org/responsivevoice.js"
+  ],
+  "stripPrefix": "www/",
+  "cacheId": "let-me-see-v1",
+  "maximumFileSizeToCacheInBytes": 4194304,
+  "ignoreUrlParametersMatching": "[/./]"
+}

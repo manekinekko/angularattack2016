@@ -1,0 +1,14 @@
+{
+  "lang": "en",
+  "background_color": "#2c1a31",
+  "name": "Let Me See",
+  "short_name": "Let Me See",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "YOU-NEED-TO-HAVE-A-144-x-144-ICON.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
