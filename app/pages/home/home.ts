@@ -1,10 +1,10 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
-import * as annyang from 'annyang';
+
+import {CommandOption} from 'annyang';
+
 import {Vision} from '../../services/vision';
 import {ResponsiveVoice} from '../../services/responsive-voice';
-
-// declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
     ${ !(((Math.random() * 99) | 0) % 2) ? 'Welcome' : 'Hi'}.
@@ -31,8 +31,8 @@ export class HomePage {
 
   ngOnInit() {
 
-    // Let's define a command.
-    let commands: annyang.CommandOption = {
+    // Let's define our command.
+    let commands: CommandOption = {
       'let me see': this.describeWhatISee.bind(this),
       'show me': this.describeWhatISee.bind(this),
       'describe what do you see': this.describeWhatISee.bind(this),
