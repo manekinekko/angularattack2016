@@ -70,7 +70,7 @@ export class HomePage {
     let vw, vh;
 
     if (navigator.getUserMedia) {
-      navigator.getUserMedia({ video: true },
+      navigator.getUserMedia({ video: { width: 1280, height: 720 } },
         (stream) => {
           videoNative.src = window.URL.createObjectURL(stream);
         },
