@@ -12,11 +12,7 @@ const WELCOME_TEXT: string = `
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
-  providers: [Vision],
-  styles: [`
-    video {display: none;}
-    ion-card ion-card-content {padding: 0; line-height: 0; text-align: center;}
-  `]
+  providers: [Vision]
 })
 export class HomePage {
 
