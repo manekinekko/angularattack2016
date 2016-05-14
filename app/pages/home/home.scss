@@ -1,3 +1,18 @@
 .home {
-  
+  background-color: color($colors, dark);
+}
+
+.toolbar-title {
+  color: color($colors, light) !important;
+}
+
+.card {
+  padding: 0;
+  line-height: 0;
+  text-align: center;
+  background-color: color($colors, primary);
+}
+
+video {
+  display: none;
 }

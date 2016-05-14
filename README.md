@@ -1,4 +1,4 @@
-### TEAM
+# README FIRST
 
 ## test locally
 
@@ -11,6 +11,12 @@ $ ionic serve --address localhost
 ```
 $ cd angularattack2016-angularlabs/
 $ surge www
+```
+
+## Access the `https` deployed app (not http)
+
+```
+https://angularlabs.2016.angularattack.io/
 ```
 
 # This is your [AngularAttack](https://www.angularattack.com) 2016 Repo

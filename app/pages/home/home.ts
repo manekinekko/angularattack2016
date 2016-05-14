@@ -6,17 +6,13 @@ import {Vision} from '../../services/vision';
 declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
-    ${ !(((Math.random()*99)|0)%2) ? 'Welcom':'Hi' }.
+    ${ !(((Math.random()*99)|0)%2) ? 'Welcome':'Hi' }.
     Please use your voice to interact with me.
   `;
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
-  providers: [Vision],
-  styles: [`
-    video {display: none;}
-    ion-card ion-card-content {padding: 0; line-height: 0; text-align: center;}
-  `]
+  providers: [Vision]
 })
 export class HomePage {
 
