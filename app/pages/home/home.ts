@@ -37,7 +37,8 @@ export class HomePage {
   ngAfterViewInit() {
 
     window.URL = window.URL || (<any>window).webkitURL;
-    (<any>navigator).getUserMedia = (<any>navigator).getUserMedia || (<any>navigator).webkitGetUserMedia;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
     let video = this.video.nativeElement;
     let canvas = this.canvas.nativeElement;
     let context = canvas.getContext('2d');
