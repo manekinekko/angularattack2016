@@ -1,7 +1,7 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
+import * as annyang from 'annyang';
 
-declare var annyang;
 declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
@@ -71,23 +71,21 @@ export class HomePage {
   }
 
   private listen() {
-    if (annyang) {
-      // Let's define a command.
-      let commands = {
-        'let me see': () => {
-          this.say('The cloud vision API is not yet implemented.');
-        },
-        'how do I look': () => {
-          this.say('Facial expressions are not yet implemented.');
-        }
-      };
+    // Let's define a command.
+    let commands: annyang.CommandOption = {
+      'let me see': () => {
+        this.say('The cloud vision API is not yet implemented.');
+      },
+      'how do I look': () => {
+        this.say('Facial expressions are not yet implemented.');
+      }
+    };
 
-      // Add our commands to annyang
-      annyang.addCommands(commands);
+    // Add our commands to annyang
+    annyang.addCommands(commands);
 
-      // Start listening.
-      annyang.start();
-    }
+    // Start listening.
+    annyang.start({});
   }
 
   private say(text: string) {
