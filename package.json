@@ -38,7 +38,9 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-vibration"
   ],
-  "cordovaPlatforms": [],
+  "cordovaPlatforms": [
+    "android"
+  ],
   "name": "letmesee",
   "description": "angularattack: Let Me See"
 }

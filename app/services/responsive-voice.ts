@@ -11,11 +11,13 @@ export class ResponsiveVoice {
 
   public listen(commands: annyang.CommandOption, welcomeText: string) {
 
-    // Add our commands to annyang
-    annyang.addCommands(commands);
+    if('annyang' in window) {
+      // Add our commands to annyang
+      annyang.addCommands(commands);
 
-    // Start listening.
-    annyang.start({ continuous: true });
+      // Start listening.
+      annyang.start({ continuous: true });
+    }
 
     // Setup defaults and say welcome
     if('responsiveVoice' in window) {
