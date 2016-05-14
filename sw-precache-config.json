@@ -9,6 +9,7 @@
     "www/**/*.{png,jpg,gif,svg}",
     "https://code.responsivevoice.org/responsivevoice.js"
   ],
+  "handleFetch": true,
   "stripPrefix": "www/",
   "cacheId": "let-me-see-v1",
   "maximumFileSizeToCacheInBytes": 4194304,
