@@ -99,7 +99,7 @@ export class HomePage {
     annyang.addCommands(commands);
 
     // Start listening.
-    annyang.start({});
+    annyang.start({continuous: true});
   }
 
   private describeFacial() {
