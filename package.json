@@ -23,7 +23,8 @@
     "ionic-gulp-sass-build": "^1.0.0",
     "ionic-gulp-scripts-copy": "^1.0.1",
     "run-sequence": "1.1.5",
-    "tslint": "^3.10.2"
+    "tslint": "^3.10.2",
+    "typings": "^0.8.1"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

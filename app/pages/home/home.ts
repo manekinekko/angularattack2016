@@ -43,8 +43,8 @@ export class HomePage {
     let context = canvas.getContext('2d');
     let vw, vh;
 
-    if ((<any>navigator).getUserMedia) {
-      (<any>navigator).getUserMedia({ video: true },
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({ video: true },
         (stream) => {
           video.src = window.URL.createObjectURL(stream);
         },
