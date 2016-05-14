@@ -72,7 +72,7 @@ export class HomePage {
   private listen() {
     if (annyang) {
       // Let's define a command.
-      var commands = {
+      let commands = {
         'let me see': () => {
           this.say('The cloud vision API is not yet implemented.');
         },
