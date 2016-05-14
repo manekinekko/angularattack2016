@@ -2,36 +2,37 @@ import {Injectable, EventEmitter} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
+export const FEATURE_TYPE = {
+  'TYPE_UNSPECIFIED': 'TYPE_UNSPECIFIED',
+  'FACE_DETECTION': 'FACE_DETECTION',
+  'LANDMARK_DETECTION': 'LANDMARK_DETECTION',
+  'LOGO_DETECTION': 'LOGO_DETECTION',
+  'LABEL_DETECTION': 'LABEL_DETECTION',
+  'TEXT_DETECTION': 'TEXT_DETECTION',
+  'SAFE_SEARCH_DETECTION': 'SAFE_SEARCH_DETECTION',
+  'IMAGE_PROPERTIES': 'IMAGE_PROPERTIES'
+};
+
 @Injectable()
 export class Vision {
 
   private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAxtYY-XwspbDUGYF21aqSlFxTnI8EGzbw';
-  private FEATURE_TYPE: string[] = [
-    'TYPE_UNSPECIFIED',
-    'FACE_DETECTION',
-    'LANDMARK_DETECTION',
-    'LOGO_DETECTION',
-    'LABEL_DETECTION',
-    'TEXT_DETECTION',
-    'SAFE_SEARCH_DETECTION',
-    'IMAGE_PROPERTIES'
-  ];
-  private obs$: EventEmitter<string[]>;
+  private obs$: EventEmitter<any>;
   private visionEndpoint: string;
 
   constructor(private http: Http) {
 
-    this.obs$ = new EventEmitter<string[]>();
+    this.obs$ = new EventEmitter<any>();
   }
 
-  process(base64: string) {
+  process(base64: string, feature: string = FEATURE_TYPE.LABEL_DETECTION) {
     let request: any = {
       requests: [{
         image: {
           content: base64.replace(/data:image\/(jpeg|png);base64,/g, '')
         },
         features: [{
-          type: this.FEATURE_TYPE[4],
+          type: feature,
           maxResults: 200
         }]
       }]
@@ -51,17 +52,33 @@ export class Vision {
       .map(res => res.json())
       .subscribe(
         data => this.processMetadata(data),
-        err => console.log(err),
+        err => this.obs$.emit({error:true}),
         () => console.log('Image analysis Complete')
       );
   }
 
   private processMetadata(data: any) {
-    data = (data.responses||[])
-      .map( (arg) => arg.labelAnnotations)
-      .map( (arg) => (arg||[]).map( o => o.description ))
-    data = <string[]>([].concat.apply([], data));
 
-    this.obs$.emit(data);
+    data.responses = data.responses || {};
+    if(Array.isArray(data.responses)) {
+      data.responses = data.responses.pop();
+    }
+
+    let labels = [];
+    (data.responses.labelAnnotations || []).forEach( (lbl) => {
+        labels.push(lbl.description);
+    });
+
+    if(labels.length === 0) {
+      (data.responses.faceAnnotations || []).forEach( (expression) => {
+          for(var exp in expression) {
+            if( exp.indexOf('Likelihood') !== -1 ) {
+              labels.push(exp.replace('Likelihood', ''));
+            }
+          }
+      });
+    }
+
+    this.obs$.emit({labels:labels});
   }
 }
