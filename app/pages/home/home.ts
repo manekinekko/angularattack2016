@@ -31,13 +31,17 @@ export class HomePage {
     this.listen();
     responsiveVoice.OnVoiceReady = () => {
       this.speak();
-    }
+    };
   }
 
   ngAfterViewInit() {
 
     window.URL = window.URL || (<any>window).webkitURL;
     (<any>navigator).getUserMedia = (<any>navigator).getUserMedia || (<any>navigator).webkitGetUserMedia;
+    let video = this.video.nativeElement;
+    let canvas = this.canvas.nativeElement;
+    let context = canvas.getContext('2d');
+    let vw, vh;
 
     if ((<any>navigator).getUserMedia) {
       (<any>navigator).getUserMedia({ video: true },
@@ -53,12 +57,8 @@ export class HomePage {
       }
       context.drawImage(video, 0, 0, vw, vh);
       window.requestAnimationFrame(draw);
-    }
+    };
 
-    let video = this.video.nativeElement;
-    let canvas = this.canvas.nativeElement;
-    let context = canvas.getContext('2d');
-    let vw, vh;
     video.addEventListener('loadedmetadata', function () {
       vw = this.videoWidth || this.width;
       vh = this.videoHeight || this.height;
