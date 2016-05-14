@@ -1,13 +1,12 @@
 import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Page} from 'ionic-angular';
 import * as annyang from 'annyang';
-import {Vision} from '../../services/vision';
+import {Vision, FEATURE_TYPE} from '../../services/vision';
 
 declare var responsiveVoice;
 
 const WELCOME_TEXT: string = `
-    ${ !(((Math.random()*99)|0)%2) ? 'Welcome':'Hi' }.
-    Please use your voice to interact with me.
+    Hi. How can I help you?
   `;
 
 @Page({
@@ -31,17 +30,28 @@ export class HomePage {
 
     this.listen();
 
-    responsiveVoice.OnVoiceReady = () => {
-      responsiveVoice.setDefaultVoice('US English Female');
-      this.speak();
-    };
+
+    if('responsiveVoice' in window) {
+      responsiveVoice.OnVoiceReady = () => {
+        responsiveVoice.setDefaultVoice('US English Female');
+        setTimeout(this.say(WELCOME_TEXT), 4000);
+      };
+    }
+
 
     this.vision.onResults().subscribe(
-      (labels) => {
-        let text = `I see...${labels.join('! ')}`;
-        if(labels.length === 0) {
-          text = `Sorry! I could not recognize what you are showing me...`;
+      (data) => {
+        let text = '';
+        if(data.labels) {
+          text = `I see, ${data.labels.join(', ')}`;
+          if(data.labels.length === 0) {
+            text = `Sorry! I could not recognize what I see.`;
+          }
         }
+        else if (data.error) {
+          text = `Sorry! I am not able to give an answer. Please try later.`;
+        }
+
         this.say(text);
       },
       (err) => console.error(err),
@@ -89,9 +99,8 @@ export class HomePage {
   private listen() {
     // Let's define a command.
     let commands: annyang.CommandOption = {
-      'let me see': this.describeWhatISee.bind(this),
       'show me': this.describeWhatISee.bind(this),
-      'describe what do you see': this.describeWhatISee.bind(this),
+      'what do you see': this.describeWhatISee.bind(this),
       'how do I look': this.describeFacial.bind(this)
     };
 
@@ -103,19 +112,22 @@ export class HomePage {
   }
 
   private describeFacial() {
-    this.say('Facial expressions are not yet implemented.');
+    //this.say('Sorry! Facial expressions are not yet implemented.');
+    this.vision.process(this.getBase64(), FEATURE_TYPE.FACE_DETECTION);
   }
 
   private describeWhatISee() {
-    this.say('Ok!');
-    this.vision.process(this.nativeCanvas.toDataURL());
+    this.say('Ok. let me check that for you.');
+    setTimeout(this.vision.process(this.getBase64()), 1000);
+  }
+
+  private getBase64() {
+    return this.nativeCanvas.toDataURL();
   }
 
   private say(text: string) {
+    responsiveVoice.cancel();
     responsiveVoice.speak(text);
   }
 
-  private speak() {
-    setTimeout(this.say(WELCOME_TEXT), 2000);
-  }
 }
