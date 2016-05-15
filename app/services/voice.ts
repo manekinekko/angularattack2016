@@ -53,10 +53,11 @@ export class Voice {
 
   rememberName(name?) {
     this.name = name;
-    this.say(`Hi ${this.name}, how can I help you`);
+    this.say(`${this.phrase.get(Phrases.GREETING)} ${this.name}, how can I help you`);
   }
 
   sorry(blah?) {
-    this.say(`Sorry ${this.name}, I don't understand ${blah}. If you are lost, just say "help"`);
+    this.say(`Sorry ${this.name}, I don't understand ${blah}. If you are lost, just say`);
+    this.say(`"help"`, { delay: 4000 + blah.length * 50 });
   }
 }

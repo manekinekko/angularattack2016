@@ -42,6 +42,7 @@ export class HomePage {
     this.speech
       .addCommands([
         'my name is :name',
+        'i am :name',
         (name) => this.voice.rememberName(name)
       ])
       .addCommands([
@@ -77,6 +78,10 @@ export class HomePage {
         '(can you) read this (for me)',
         'read it',
         () => setTimeout(this.describeText.bind(this), 1000)
+      ])
+      .addCommands([
+        ':blah',
+        (blah) => this.voice.sorry(blah)
       ])
       .start();
   }

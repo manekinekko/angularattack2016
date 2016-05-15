@@ -9,7 +9,7 @@ Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angu
 - `what color is this`,`tell me colors`: Angie will try to guess the most dominant color.
 - `who are you`: Angie will introduce herself.
 - `help`, `what should I say`: Angie will help you use the app.
-- `my name is [name]`: Angie will remember your name.
+- `my name is [name], i am [name]`: Angie will remember your name.
 - `and this`, `and now`: Angie will replay your last query.
 
 
