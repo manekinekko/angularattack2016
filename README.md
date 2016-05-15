@@ -32,6 +32,8 @@ $ # 4) deploy to surge
 $
 $ npm run deploy
 $
+$ # 5) push the created tag to git
+$
 ```
 
 ## Deploy to surge
