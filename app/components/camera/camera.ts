@@ -2,8 +2,8 @@ import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from '
 import {Voice} from '../../services/voice';
 
 export let CAMERA_TYPE = {
-  "FRONT": "front",
-  "REAR": "environment"
+  "FRONT": "facing front",
+  "REAR": "facing back"
 };
 
 @Component({
@@ -92,10 +92,14 @@ export class CameraComponent {
     videoNative.addEventListener('play', draw, false);
   }
 
-  private figureOutWhichCameraToUse(devices) {
-    devices.forEach(device => {
-      console.log(device.kind + ": " + device.label + " id = " + device.deviceId);  
-    });
+  private figureOutWhichCameraToUse(devices): any {
+    let device = devices
+      .filter( (device) => device.label.indexOf(CAMERA_TYPE.FRONT) !== -1 )
+      .pop();
+
+    if(device) {
+      return {deviceId: device.deviceId ? {exact: device.deviceId} : undefined};
+    }
     return true;
   }
 
