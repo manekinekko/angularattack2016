@@ -5,10 +5,11 @@ import {HomePage} from './pages/home/home';
 import {Voice} from './services/voice';
 import {Speech} from './services/speech';
 import {Vision} from './services/vision';
+import {Phrase} from './services/phrase';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [Vision, Speech, Voice],
+  providers: [Vision, Speech, Voice, Phrase],
   config: {}
 })
 export class MyApp {
