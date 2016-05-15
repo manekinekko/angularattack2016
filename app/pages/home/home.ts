@@ -81,7 +81,8 @@ export class HomePage {
         () => setTimeout(this.describeText.bind(this), 1000)
       ])
       .addCommands([
-        'a filter which is a pipe filter',
+        '(a filter which is a) pipe filter',
+        'shy shy shy',
         () => this.playAudio()
       ])
       .start();
