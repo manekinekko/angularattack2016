@@ -44,70 +44,77 @@ export class Vision {
     headers.append('Content-Type', 'application/json');
 
     return this.http.post(this.VISION_ENDPOINT, JSON.stringify(request), headers)
-      .map( res => res.json() )
-      .map( res => this.processMetadata(res) );
+      .map(res => res.json())
+      .map(res => this.processMetadata(res));
   }
 
   private processMetadata(data: any): any[] | any {
 
     data.responses = data.responses || {};
-    if(Array.isArray(data.responses)) {
+    if (Array.isArray(data.responses)) {
       data.responses = data.responses.pop();
     }
 
-    if(data.responses.labelAnnotations) {
+    if (data.responses.labelAnnotations) {
       let labels = [];
-      (data.responses.labelAnnotations || []).forEach( (lbl) => {
+      (data.responses.labelAnnotations || []).forEach((lbl) => {
         labels.push(lbl.description);
       });
-      return {labels};
+      return { labels };
     }
 
-    if(data.responses.faceAnnotations) {
+    if (data.responses.faceAnnotations) {
       let face = [];
-      (data.responses.faceAnnotations || []).forEach( (expression) => {
-        for(var exp in expression) {
-          if( exp.indexOf('Likelihood') !== -1 ) {
+      (data.responses.faceAnnotations || []).forEach((expression) => {
+        for (var exp in expression) {
+          if (exp.indexOf('Likelihood') !== -1) {
             face.push(exp.replace('Likelihood', ''));
           }
         }
       });
-      return {face};
+      return { face };
     }
 
-    if(data.responses.imagePropertiesAnnotation) {
-      let color = data.responses
+    if (data.responses.imagePropertiesAnnotation) {
+      let colorResponse = data.responses
         .imagePropertiesAnnotation
         .dominantColors
         .colors
-        .sort( (colorA, colorB) => colorA.score > colorB.score)
+        .sort((colorA, colorB) => colorA.score > colorB.score)
         .pop();
-
-      let computedColor = this.rgbToHex(color.color.red, color.color.red, color.color.red);
+      let color: IRGBColor = colorResponse.color;
 
       color = COLORS[
         Object
           .keys(COLORS)
-          .map( (v, i, arr) => {
-            return {'color':arr[i],'d':Levenshtein(arr[i], computedColor)}
+          .map((arrayColor, key, arr) => {
+            return { 'color': arr[key], 'd': this.colorDistance(color, this.hexToRgb(arrayColor)) };
           })
-          .sort( (a,b) => a.d>b.d?-1:1 )
+          .sort((a, b) => a.d > b.d ? -1 : 1)
           .pop().color
       ];
 
-      return {color};
+      return { color };
     }
 
-    if(data.responses.textAnnotations) {
+    if (data.responses.textAnnotations) {
       let text = (data.responses.textAnnotations || []).shift();
-      return {text:[text.description]};
+      return { text: [text.description] };
     }
 
     return [];
   }
 
-  private rgbToHex(r, g, b) {
-    return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  private hexToRgb(hex: string): IRGBColor {
+    return {
+      red: parseInt(hex.substr(0, 2), 16),
+      green: parseInt(hex.substr(2, 2), 16),
+      blue: parseInt(hex.substr(4, 2), 16),
+    };
+  }
+
+  private colorDistance(left: IRGBColor, right: IRGBColor): number {
+    return Math.abs(left.red - right.red) + Math.abs(left.green - right.green) + Math.abs(left.blue - right.blue);
   }
 
 }
