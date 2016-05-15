@@ -52,7 +52,6 @@ gulp.task('watch', ['clean'], function(done){
 gulp.task('build', ['clean'], function(done){
   runSequence(
     ['sass', 'html', 'fonts', 'scripts'],
-    'version',
     function(){
       buildBrowserify({
         minify: isRelease,
@@ -70,10 +69,9 @@ gulp.task('build', ['clean'], function(done){
 gulp.task('version', function(callback) {
 
   // require('./package.json') caches files so it won't help us here.
-
   var version = JSON.parse(require('fs').readFileSync('./package.json')).version;
-
   console.log(version);
+
   return gulp.src('www/index.html')
     .pipe(gulpReplace(
       /<span (.*?)>(.*?)<\/span>/,
