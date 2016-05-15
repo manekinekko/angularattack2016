@@ -6,10 +6,12 @@ import {Voice} from '../../services/voice';
 import {Phrase, Phrases} from '../../services/phrase';
 import {CameraComponent} from '../../components/camera/camera';
 import {AngieComponent} from '../../components/angie/angie';
+import {EasterAudio} from '../../services/audio';
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
-  directives: [CameraComponent, AngieComponent]
+  directives: [CameraComponent, AngieComponent],
+  providers: [EasterAudio]
 })
 export class HomePage {
 
@@ -26,7 +28,8 @@ export class HomePage {
     private voice: Voice,
     private phrase: Phrase,
     private elementRef: ElementRef,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private audio: EasterAudio
   ) {
 
     this.lastCommand = () => { };
@@ -164,6 +167,6 @@ export class HomePage {
   }
 
   private playAudio() {
-    this.easter.nativeElement.play();
+    this.audio.playSound();
   }
 }
