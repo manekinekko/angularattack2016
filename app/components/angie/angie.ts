@@ -1,9 +1,13 @@
-import {Component, Input, OnChanges} from 'angular2/core';
+import {Component, Input, OnChanges, ViewEncapsulation} from 'angular2/core';
 
 @Component({
   selector: 'letmesee-angie',
+  styles: [`
+
+  `],
   template: `
-<svg id="svga-svgcanvas" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink"
+<svg style="width: 200px; height: 200px; position: absolute; bottom: 0;"
+     id="svga-svgcanvas" xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink"
      class="svga-svg" viewBox="0 0 200 200" preserveAspectRatio="xMinYMin meet" width="400">
 	<g id="svga-group-wrapper">
 		<g id="svga-group-backs-single"></g>
