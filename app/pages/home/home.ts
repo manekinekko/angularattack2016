@@ -4,10 +4,11 @@ import {Speech} from '../../services/speech';
 import {Vision, FEATURE_TYPE} from '../../services/vision';
 import {Voice} from '../../services/voice';
 import {CameraComponent} from '../../components/camera/camera';
+import {AngieComponent} from '../../components/angie/angie';
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
-  directives: [CameraComponent]
+  directives: [CameraComponent, AngieComponent]
 })
 export class HomePage {
 
@@ -15,6 +16,7 @@ export class HomePage {
   @ViewChild('card') card;
 
   private lastCommand: Function;
+  private angieSpeaking: boolean = false;
 
   constructor(
     private speech: Speech,
@@ -27,7 +29,11 @@ export class HomePage {
     this.lastCommand = () => {};
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.voice.speaking.subscribe(value => {
+      this.angieSpeaking = value;
+    });
+  }
 
   ngAfterViewInit() {
 

@@ -11,8 +11,10 @@
   <ion-card #card>
 
     <ion-card-content class="card">
+      <letmesee-angie [speaking]="angieSpeaking"></letmesee-angie>
       <letmesee-camera (onDimensionUpdate)="updateCardDimension($event)"></letmesee-camera>
     </ion-card-content>
+
 
   </ion-card>
 </ion-content>

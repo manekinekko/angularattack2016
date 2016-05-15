@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable, EventEmitter } from 'angular2/core';
 
 import * as annyang from 'annyang';
 
@@ -8,6 +8,8 @@ declare var responsiveVoice;
 export class Voice {
 
   private rv: any = null;
+
+  public speaking = new EventEmitter<boolean>();
 
   constructor() {
     if('responsiveVoice' in window) {
@@ -24,7 +26,13 @@ export class Voice {
 
   say(text: string, options: any = {}) {
     options.delay = options.delay || 0;
-    setTimeout(() => this.rv.speak(text), options.delay);
+    setTimeout(() => {
+      this.speaking.emit(true);
+      this.rv.speak(text);
+      setTimeout(() => {
+        this.speaking.emit(false);
+      }, 2500);
+    }, options.delay);
   }
 
   help() {
