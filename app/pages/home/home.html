@@ -8,11 +8,10 @@
 </ion-navbar>
 
 <ion-content class="home">
-  <ion-card [style.width.px]="canvas.width">
+  <ion-card #card>
 
     <ion-card-content class="card">
-      <canvas width='1280' height='720' #canvas></canvas>
-      <video width='1280' height='720' #video preload='auto' autoplay></video>
+      <letmesee-camera (onDimensionUpdate)="updateCardDimension($event)"></letmesee-camera>
     </ion-card-content>
 
   </ion-card>
