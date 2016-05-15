@@ -1,4 +1,10 @@
-
+/**
+ * Compute the distance between two strings.
+ *
+ * @param  {String} str1 The first string
+ * @param  {String} str2 The second string
+ * @return {Number}      The distance between str1 and str2.
+ */
 export function Levenshtein(str1, str2) {
   // base cases
   if (str1 === str2) return 0;
