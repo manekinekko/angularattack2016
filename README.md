@@ -6,7 +6,7 @@ Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angu
 
 - `let me see`, `show me`, `(describe) what do you see`: Angie will tell you what see can see.
 - `how do I look`: Angie will try to guess what is your face expression.
-- `what color is this`: Angie will try to guess the most dominant color.
+- `what color is this`,`tell me colors`: Angie will try to guess the most dominant color.
 - `who are you`: Angie will introduce herself.
 - `help`, `what should I say`: Angie will help you use the app.
 - `my name is [name]`: Angie will remember your name.

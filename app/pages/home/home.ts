@@ -26,7 +26,7 @@ export class HomePage {
     private renderer: Renderer
   ) {
 
-    this.lastCommand = () => {};
+    this.lastCommand = () => { };
   }
 
   ngOnInit() {
@@ -53,6 +53,7 @@ export class HomePage {
         () => setTimeout(this.describeFacial.bind(this), 1000)
       ])
       .addCommands([
+        'tell me colors',
         'what color is this',
         () => setTimeout(this.describeColor.bind(this), 1000)
       ])
@@ -79,9 +80,9 @@ export class HomePage {
 
   private describeWhatISee() {
     this.lastCommand = () => {
-      this.voice.say('Ok. let me check that for you.');
+      this.voice.say(`Ok ${this.voice.name}. let me check that for you.`);
       this.vision.process(this.camera.getImageAsBase64()).subscribe(
-        data => this.voice.say(this.formatText(data.labels), {delay:2000}),
+        data => this.voice.say(this.formatText(data.labels), { delay: 2000 }),
         err => console.error(err),
         () => console.log('done')
       );
@@ -92,13 +93,13 @@ export class HomePage {
 
   private describeFacial() {
     this.lastCommand = () => {
-      this.voice.say('Ok. let me guess.');
+      this.voice.say(`Ok ${this.voice.name}. let me describe your face.`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.FACE_DETECTION)
-      .subscribe(
-        data => this.voice.say(this.formatText(data.face), {delay:1500}),
+        .subscribe(
+        data => this.voice.say(this.formatText(data.face), { delay: 1500 }),
         err => console.error(err),
         () => console.log('done')
-      );
+        );
     };
 
     this.lastCommand();
@@ -106,13 +107,13 @@ export class HomePage {
 
   private describeColor() {
     this.lastCommand = () => {
-      this.voice.say('Ok. let me analyse it.');
+      this.voice.say(`Ok you need colors. let me analyse it ${this.voice.name}.`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.IMAGE_PROPERTIES)
-      .subscribe(
-        data => this.voice.say(`Well, I see mostly ${data.color}`, {delay:1500}),
+        .subscribe(
+        data => this.voice.say(`Well ${this.voice.name}, I see mostly ${data.color}`, { delay: 1500 }),
         err => console.error(err),
         () => console.log('done')
-      );
+        );
     };
 
     this.lastCommand();
@@ -125,7 +126,7 @@ export class HomePage {
   private formatText(data: string[] = []): string {
     let text = `I see, ${data.join(', ')}`;
     if (data.length === 0) {
-      text = `Sorry! I could not recognize what I see.`;
+      text = `Sorry ${this.voice.name}! I could not recognize what I see.`;
     }
     return text;
   }

@@ -12,9 +12,10 @@ export class Voice {
   private rv: any = null;
 
   public speaking = new EventEmitter<boolean>();
+  public name = '';
 
   constructor() {
-    if('responsiveVoice' in window) {
+    if ('responsiveVoice' in window) {
       this.rv = responsiveVoice;
     }
   }
@@ -22,7 +23,8 @@ export class Voice {
   start() {
     this.rv.OnVoiceReady = () => {
       this.rv.setDefaultVoice(SPEECH_VOICE);
-      this.say('Hi. How can I help you?', {delay:1000});
+      this.say('Hi. How can I help you?', { delay: 1000 });
+      this.say('What is your name?', { delay: 4000 });
     };
   }
 
@@ -44,14 +46,15 @@ export class Voice {
   }
 
   whoAmI() {
-    this.say('My name is Angie, and I am here to help you see the world.');
+    this.say(`You are welcome ${name}, my name is Angie, and I am here to help you see the world.`);
   }
 
   rememberName(name?) {
-    this.say(`Hi ${name}, how can I help you`);
+    this.name = name;
+    this.say(`Hi ${this.name}, how can I help you`);
   }
 
   sorry(blah?) {
-    this.say(`Sorry, I don't understand ${blah}. If you are lost, just say "help"`);
+    this.say(`Sorry ${this.name}, I don't understand ${blah}. If you are lost, just say "help"`);
   }
 }
