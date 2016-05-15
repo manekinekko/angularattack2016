@@ -26,8 +26,8 @@ export class Voice {
   start() {
     this.rv.OnVoiceReady = () => {
       this.rv.setDefaultVoice(SPEECH_VOICE);
-      this.say(`${this.phrase.get(Phrases.GREETING)}. How can I help you?`, { delay: 1000 });
-      this.say('What is your name?', { delay: 4000 });
+      this.say(`${this.phrase.get(Phrases.GREETING)}. ${this.phrase.get(Phrases.HELP)}`, { delay: 1000 });
+      this.say(`${this.phrase.get(Phrases.NAME)}`, { delay: 4000 });
     };
   }
 
@@ -68,7 +68,7 @@ export class Voice {
   }
 
   sorry(blah?) {
-    this.say(`Sorry ${this.name}, I don't understand ${blah}. If you are lost, just say`);
-    this.say(`"help"`, { delay: 4000 + blah.length * 50 });
+    this.say(`Sorry ${this.name}, I don't understand ${blah}. If you are lost, just say "help"`);
   }
+
 }

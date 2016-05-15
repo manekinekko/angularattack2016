@@ -4,26 +4,40 @@
 
 Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angularattack.io) on your phone or computer. You can ask Angie ([NG](https://www.youtube.com/v/aSFfLVxT5vA&start=46&end=89&version=3&&autoplay=1&loop=1)) the following questions:
 
-- `let me see`, `show me`, `(describe) what do you see`: Angie will tell you what see can see.
-- `how do I look`: Angie will try to guess what is your face expression.
-- `what color is this`,`tell me colors`: Angie will try to guess the most dominant color.
+- `my name is [name], i am [name]`: Angie will remember your name.
 - `who are you`: Angie will introduce herself.
 - `help`, `what should I say`: Angie will help you use the app.
-- `my name is [name], i am [name]`: Angie will remember your name.
+- `let me see`, `show me`, `(describe) what do you see`: Angie will tell you what you can see.
+- `how do I look`: Angie will try to guess what is your face expression.
+- `what color is this`,`tell me colors`: Angie will try to guess the most dominant color.
+- `(can you) read this (for me)`: Angie will read a text for you.
 - `and this`, `and now`: Angie will replay your last query.
 
 
-## test locally
+## local devs
 
-```
-$ ionic serve --address localhost
+```bash
+$ # 1) use this command to serve your local dev in your browser (with livereload support)
+$
+$ npm run serve
+$ 
+$ # 2) build the browser version of the app
+$ 
+$ npm run build
+$ 
+$ # 3) commit all updates to git (with your favorit tool)
+$ # MAKE SURE YOU COMMIT sw.js TO GITHUB!!
+$
+$ # 4) deploy to surge
+$
+$ npm run deploy
+$
 ```
 
 ## Deploy to surge
 
 ```
-$ cd angularattack2016-angularlabs/
-$ surge www
+$ npm run deploy
 ```
 
 ## Access the `https` deployed app (not http)
