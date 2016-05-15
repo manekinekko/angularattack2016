@@ -1,11 +1,9 @@
 {
   "scripts": {
-    "build": "ionic build browser && npm run sw-precache && npm run git-commit",
+    "build": "ionic build browser",
     "git-push": "git push origin master --tags",
-    "git-commit": "git commit -m 'chore(sw): update sw' &> /dev/null",
     "surge": "surge www",
     "bump": "npm version patch",
-    "sw-precache": "node_modules/.bin/sw-precache --config=sw-precache-config.json --verbose",
     "deploy": "npm run build && npm run bump && npm run git-push && npm run surge"
   },
   "dependencies": {

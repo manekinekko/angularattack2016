@@ -14,6 +14,7 @@ gulp.task('serve:before', ['watch']);
 gulp.task('emulate:before', ['build']);
 gulp.task('deploy:before', ['build']);
 gulp.task('build:before', ['build']);
+gulp.task('build:after', ['sw']);
 
 // we want to 'watch' when livereloading
 var shouldWatch = argv.indexOf('-l') > -1 || argv.indexOf('--livereload') > -1;
@@ -38,6 +39,7 @@ var isRelease = argv.indexOf('--release') > -1;
 gulp.task('watch', ['clean'], function(done){
   runSequence(
     ['sass', 'html', 'fonts', 'scripts'],
+    'sw',
     function(){
       gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
       gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
@@ -61,6 +63,15 @@ gulp.task('build', ['clean'], function(done){
       }).on('end', done);
     }
   );
+});
+
+gulp.task('sw', function(callback) {
+  var path = require('path');
+  var swPrecache = require('sw-precache');
+  var rootDir = 'www';
+  var options = require('./sw-precache-config.json');
+  options.ignoreUrlParametersMatching = [/./];
+  swPrecache.write(path.join(rootDir, 'sw.js'), options, callback);
 });
 
 gulp.task('sass', buildSass);

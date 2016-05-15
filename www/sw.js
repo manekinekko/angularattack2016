@@ -34,7 +34,7 @@ var PrecacheConfig = [["build/css/app.ios.css","c7dd6f29e413e5d835c44351bf8baa6e
 var CacheNamePrefix = 'sw-precache-v1-let-me-see-v1-' + (self.registration ? self.registration.scope : '') + '-';
 
 
-var IgnoreUrlParametersMatching = [/[\/.\/]/];
+var IgnoreUrlParametersMatching = [[/./]];
 
 
 

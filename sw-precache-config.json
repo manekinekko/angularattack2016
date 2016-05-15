@@ -13,5 +13,6 @@
   "stripPrefix": "www/",
   "cacheId": "let-me-see-v1",
   "maximumFileSizeToCacheInBytes": 4194304,
-  "ignoreUrlParametersMatching": "[/./]"
+  "ignoreUrlParametersMatching": "[/./]",
+  "verbose": true
 }
