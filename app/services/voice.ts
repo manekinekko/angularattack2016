@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from 'angular2/core';
 
 import * as annyang from 'annyang';
 
+const SPEECH_VOICE = 'US English Female';
+
 declare var responsiveVoice;
 
 @Injectable()
@@ -19,7 +21,7 @@ export class Voice {
 
   start() {
     this.rv.OnVoiceReady = () => {
-      this.rv.setDefaultVoice('US English Female');
+      this.rv.setDefaultVoice(SPEECH_VOICE);
       this.say('Hi. How can I help you?', {delay:1000});
     };
   }
@@ -27,11 +29,10 @@ export class Voice {
   say(text: string, options: any = {}) {
     options.delay = options.delay || 0;
     setTimeout(() => {
-      this.speaking.emit(true);
-      this.rv.speak(text);
-      setTimeout(() => {
-        this.speaking.emit(false);
-      }, 2500);
+      this.rv.speak(text, SPEECH_VOICE, {
+        onstart: () => this.speaking.emit(true),
+        onend: () => this.speaking.emit(false)
+      });
     }, options.delay);
   }
 

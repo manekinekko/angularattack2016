@@ -561,6 +561,6 @@ export class AngieComponent implements OnChanges {
   speak() {
     this.speakTimer = setInterval(() => {
       this.mouthOpen = !this.mouthOpen;
-    }, 350);
+    }, 200);
   }
 }
