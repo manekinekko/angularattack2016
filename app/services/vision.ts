@@ -1,5 +1,8 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
+import {COLORS} from './colors-dictionary';
+import {Levenshtein} from './algorithms';
+
 import 'rxjs/add/operator/map';
 
 export const FEATURE_TYPE = {
@@ -17,12 +20,8 @@ export const FEATURE_TYPE = {
 export class Vision {
 
   private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAxtYY-XwspbDUGYF21aqSlFxTnI8EGzbw';
-  private obs$: EventEmitter<any>;
-  private visionEndpoint: string;
 
   constructor(private http: Http) {
-
-    this.obs$ = new EventEmitter<any>();
   }
 
   process(base64: string, feature: string = FEATURE_TYPE.LABEL_DETECTION) {
@@ -37,48 +36,73 @@ export class Vision {
         }]
       }]
     };
-    this.post(request);
-  }
-
-  onResults() {
-    return this.obs$;
+    return this.post(request);
   }
 
   private post(request: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    this.http.post(this.VISION_ENDPOINT, JSON.stringify(request), headers)
-      .map(res => res.json())
-      .subscribe(
-        data => this.processMetadata(data),
-        err => this.obs$.emit({error:true}),
-        () => console.log('Image analysis Complete')
-      );
+    return this.http.post(this.VISION_ENDPOINT, JSON.stringify(request), headers)
+      .map( res => res.json() )
+      .map( res => this.processMetadata(res) );
   }
 
-  private processMetadata(data: any) {
+  private processMetadata(data: any): any[] | any {
 
     data.responses = data.responses || {};
     if(Array.isArray(data.responses)) {
       data.responses = data.responses.pop();
     }
 
-    let labels = [];
-    (data.responses.labelAnnotations || []).forEach( (lbl) => {
+    if(data.responses.labelAnnotations) {
+      let labels = [];
+      (data.responses.labelAnnotations || []).forEach( (lbl) => {
         labels.push(lbl.description);
-    });
-
-    if(labels.length === 0) {
-      (data.responses.faceAnnotations || []).forEach( (expression) => {
-          for(var exp in expression) {
-            if( exp.indexOf('Likelihood') !== -1 ) {
-              labels.push(exp.replace('Likelihood', ''));
-            }
-          }
       });
+      return {labels};
     }
 
-    this.obs$.emit({labels:labels});
+    if(data.responses.faceAnnotations) {
+      let face = [];
+      (data.responses.faceAnnotations || []).forEach( (expression) => {
+        for(var exp in expression) {
+          if( exp.indexOf('Likelihood') !== -1 ) {
+            face.push(exp.replace('Likelihood', ''));
+          }
+        }
+      });
+      return {face};
+    }
+
+    if(data.responses.imagePropertiesAnnotation) {
+      let color = data.responses
+        .imagePropertiesAnnotation
+        .dominantColors
+        .colors
+        .sort( (colorA, colorB) => colorA.score > colorB.score)
+        .pop();
+
+      let computedColor = this.rgbToHex(color.color.red, color.color.red, color.color.red);
+
+      color = COLORS[
+        Object
+          .keys(COLORS)
+          .map( (v, i, arr) => {
+            return {'color':arr[i],'d':Levenshtein(arr[i], computedColor)}
+          })
+          .sort( (a,b) => a.d>b.d?-1:1 )
+          .pop().color
+      ];
+
+      return {color};
+    }
+
+    return [];
   }
+
+  private rgbToHex(r, g, b) {
+    return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+
 }

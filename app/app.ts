@@ -1,18 +1,25 @@
 
 import {App, Platform} from 'ionic-angular';
+import {Vibration} from 'ionic-native';
 import {HomePage} from './pages/home/home';
+import {Voice} from './services/voice';
+import {Speech} from './services/speech';
+import {Vision} from './services/vision';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  providers: [Vision, Speech, Voice],
+  config: {}
 })
 export class MyApp {
   rootPage: any = HomePage;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, private voice: Voice) {
+
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      this.voice.start();
+      Vibration.vibrate(500);
     });
+
   }
 }
