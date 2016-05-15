@@ -1,3 +1,7 @@
+## LetMeSee: The assistant app of people with sight loss
+
+<p align="center"><img src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/letmesee.png?token=ABnuHVsHTukQd_OhOock6U4rpwyRvhNbks5XQiVGwA%3D%3D" width="300px" /></p>
+
 # README FIRST
 
 ## How to use the app
