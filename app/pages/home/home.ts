@@ -73,6 +73,11 @@ export class HomePage {
         'and now',
         () => this.replayLastCommand()
       ])
+      .addCommands([
+        '(can you) read this (for me)',
+        'read it',
+        () => setTimeout(this.describeText.bind(this), 1000)
+      ])
       .start();
   }
 
@@ -121,12 +126,28 @@ export class HomePage {
     this.lastCommand();
   }
 
+  private describeText() {
+    this.lastCommand = () => {
+      this.voice.say(`${this.phrase.get(Phrases.OK)} let me read this for you ${this.voice.name}.`);
+      this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.TEXT_DETECTION)
+        .subscribe(
+        data => this.voice.say(this.formatText(data.text, 'Here is the extracted text:'), { delay: 2000 }),
+        err => console.error(err),
+        () => console.log('done')
+        );
+    };
+
+    this.lastCommand();
+  }
+
   private replayLastCommand() {
     this.lastCommand();
   }
 
-  private formatText(data: string[] = []): string {
-    let text = `I see, ${data.join(', ')}`;
+  private formatText(data: string[] = [], defaultText: string = 'I see'): string {
+    console.log(data);
+
+    let text = `Well ${this.voice.name}, ${defaultText} ${data.join(', ')}`;
     if (data.length === 0) {
       text = `Sorry ${this.voice.name}! I could not recognize what I see.`;
     }

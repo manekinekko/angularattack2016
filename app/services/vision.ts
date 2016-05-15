@@ -98,6 +98,11 @@ export class Vision {
       return {color};
     }
 
+    if(data.responses.textAnnotations) {
+      let text = (data.responses.textAnnotations || []).shift();
+      return {text:[text.description]};
+    }
+
     return [];
   }
 
