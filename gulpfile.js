@@ -74,7 +74,7 @@ gulp.task('version', function(callback) {
 
   return gulp.src('www/index.html')
     .pipe(gulpReplace(
-      /<span (.*?)>(.*?)<\/span>/,
+      /<span (.*?)>v(.*?)<\/span>/,
       '<span $1>v'+version+'</span>'
     ))
     .pipe(gulp.dest('www/'))
