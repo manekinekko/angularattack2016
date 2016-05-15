@@ -1,5 +1,18 @@
 # README FIRST
 
+## How to use the app
+
+Go the `https://angularlabs.2016.angularattack.io/` on your phone or computer. You can ask Angie (NG) the following questions:
+
+- `let me see`, `show me`, `(describe) what do you see`: Angie will tell you what see can see.
+- `how do I look`: Angie will try to guess what is your face expression.
+- `what color is this`: Angie will try to guess the most dominant color.
+- `who are you`: Angie will introduce herself.
+- `help`, `what should I say`: Angie will help you use the app.
+- `my name is [name]`: Angie will remember your name.
+- `and this`, `and now`: Angie will replay your last query.
+
+
 ## test locally
 
 ```
