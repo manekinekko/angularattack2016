@@ -83,18 +83,7 @@ export class Vision {
         .sort((colorA, colorB) => colorA.score > colorB.score)
         .pop();
       let color: IRGBColor = colorResponse.color;
-
-      color = COLORS[
-        Object
-          .keys(COLORS)
-          .map((arrayColor, key, arr) => {
-            return { 'color': arr[key], 'd': this.colorDistance(color, this.hexToRgb(arrayColor)) };
-          })
-          .sort((a, b) => a.d > b.d ? -1 : 1)
-          .pop().color
-      ];
-
-      return { color };
+      return { color: this.findNearestColorName(color) };
     }
 
     if (data.responses.textAnnotations) {
@@ -103,6 +92,18 @@ export class Vision {
     }
 
     return [];
+  }
+
+  private findNearestColorName(color: IRGBColor): string {
+    return COLORS[
+      Object
+        .keys(COLORS)
+        .map((arrayColor, key, arr) => {
+          return { color: arr[key], distance: this.colorDistance(color, this.hexToRgb(arrayColor)) };
+        })
+        .sort((a, b) => a.distance > b.distance ? -1 : 1)
+        .pop().color
+    ];
   }
 
   private hexToRgb(hex: string): IRGBColor {
