@@ -11,6 +11,7 @@ export class Voice {
 
   private rv: any = null;
   private isSpeaking: boolean = false;
+  private q = [];
 
   public speaking = new EventEmitter<boolean>();
   public name = '';
@@ -18,6 +19,8 @@ export class Voice {
   constructor(
     private phrase: Phrase
   ) {
+    this.q = [];
+
     if ('responsiveVoice' in window) {
       this.rv = responsiveVoice;
     }
@@ -28,7 +31,16 @@ export class Voice {
       this.rv.setDefaultVoice(SPEECH_VOICE);
       this.say(`${this.phrase.get(Phrases.GREETING)}. ${this.phrase.get(Phrases.HELP)}`, { delay: 1000 });
       this.say(`${this.phrase.get(Phrases.NAME)}`, { delay: 4000 });
+
+      this.q.forEach( (text) => this.say(text, { delay: 8000}) );
+      this.q = [];
+
     };
+  }
+
+  sayDelay(text: string) {
+    console.log('pushing text', text);
+    this.q.push(text);
   }
 
   say(text: string, options: any = {}) {

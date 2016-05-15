@@ -1,4 +1,5 @@
 import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from 'angular2/core';
+import {Voice} from '../../services/voice';
 
 @Component({
     selector: 'letmesee-camera',
@@ -23,7 +24,8 @@ export class CameraComponent {
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private voice: Voice
   ) {}
 
   ngAfterViewInit() {
@@ -42,6 +44,18 @@ export class CameraComponent {
         (stream) => videoNative.src = window.URL.createObjectURL(stream),
         (e) => console.log('failed', e)
       );
+
+      navigator.mediaDevices.enumerateDevices()
+        .then((devices) => {
+          let cameras = devices
+            .filter( (device) => device.kind === 'videoinput' );
+
+          this.voice.sayDelay(`Hey, I found ${cameras.length} cameras`);
+          // console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
+        })
+        .catch((err) => {
+          console.log(err.name + ": " + err.message);
+        });
     }
 
     let draw = () => {
