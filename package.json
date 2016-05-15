@@ -4,6 +4,7 @@
     "git-push": "git push origin master --tags",
     "surge": "surge www",
     "bump": "npm version patch",
+    "serve": "ionic serve --address localhost",
     "deploy": "npm run build && npm run bump && npm run git-push && npm run surge"
   },
   "dependencies": {
