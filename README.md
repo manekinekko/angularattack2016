@@ -14,17 +14,30 @@ Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angu
 - `and this`, `and now`: Angie will replay your last query.
 
 
-## test locally
+## local devs
 
-```
-$ ionic serve --address localhost
+```bash
+$ # 1) use this command to serve your local dev in your browser (with livereload support)
+$
+$ npm run serve
+$ 
+$ # 2) build the browser version of the app
+$ 
+$ npm run build
+$ 
+$ # 3) commit all updates to git (with your favorit tool)
+$ # MAKE SURE YOU COMMIT sw.js TO GITHUB!!
+$
+$ # 4) deploy to surge
+$
+$ npm run deploy
+$
 ```
 
 ## Deploy to surge
 
 ```
-$ cd angularattack2016-angularlabs/
-$ surge www
+$ npm run deploy
 ```
 
 ## Access the `https` deployed app (not http)
