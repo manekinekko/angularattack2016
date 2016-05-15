@@ -42,5 +42,6 @@
     "android"
   ],
   "name": "letmesee",
-  "description": "angularattack: Let Me See"
+  "description": "angularattack: Let Me See",
+  "version": "1.0.0"
 }
