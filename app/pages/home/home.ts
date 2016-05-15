@@ -90,6 +90,10 @@ export class HomePage {
     this.renderer.setElementStyle(this.card.nativeElement, 'width', `${event.vw}px`);
   }
 
+  describeHelp() {
+    this.voice.help();
+  }
+
   private describeWhatISee() {
     this.lastCommand = () => {
       this.voice.say(`${this.phrase.get(Phrases.OK)} ${this.voice.name}. let me check that for you.`);

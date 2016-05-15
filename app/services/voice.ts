@@ -10,6 +10,7 @@ declare var responsiveVoice;
 export class Voice {
 
   private rv: any = null;
+  private isSpeaking: boolean = false;
 
   public speaking = new EventEmitter<boolean>();
   public name = '';
@@ -34,21 +35,31 @@ export class Voice {
     options.delay = options.delay || 0;
     setTimeout(() => {
       this.rv.speak(text, SPEECH_VOICE, {
-        onstart: () => this.speaking.emit(true),
-        onend: () => this.speaking.emit(false)
+        onstart: () => {
+          this.isSpeaking = true;
+          this.speaking.emit(true);
+        },
+        onend: () => {
+          this.isSpeaking = false;
+          this.speaking.emit(false);
+        }
       });
     }, options.delay);
   }
 
   help() {
-    this.say('Ask me how do you look and I will tell you');
-    this.say('Or', { delay: 2500 });
-    this.say('if you need to know what around you just ask', { delay: 3000 });
-    this.say('I can also show you colors', { delay: 6000 });
+    if(this.isSpeaking === false) {
+      this.say(`
+        Ask me how do you look and I will tell you
+        Or
+        if you need to know what around you just ask
+        I can also show you colors, and read text
+      `);
+    }
   }
 
   whoAmI() {
-    this.say(`You are welcome ${name}, my name is Angie, and I am here to help you see the world.`);
+    this.say(`You are welcome ${name}, I am your assistant Angie, and I am here to help you see the world.`);
   }
 
   rememberName(name?) {

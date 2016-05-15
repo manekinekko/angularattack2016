@@ -10,7 +10,7 @@
 <ion-card #card>
 
   <ion-card-content class="card">
-    <letmesee-angie [speaking]="angieSpeaking"></letmesee-angie>
+    <letmesee-angie [speaking]="angieSpeaking" (onTap)="describeHelp()"></letmesee-angie>
     <letmesee-camera (onDimensionUpdate)="updateCardDimension($event)"></letmesee-camera>
   </ion-card-content>
 
