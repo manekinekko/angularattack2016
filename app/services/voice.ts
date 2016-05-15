@@ -25,7 +25,7 @@ export class Voice {
   start() {
     this.rv.OnVoiceReady = () => {
       this.rv.setDefaultVoice(SPEECH_VOICE);
-      this.say(`${this.phrase.get(Phrases.GREETING)}. How can I help you?`, { delay: 1000 });
+      this.say(`${this.phrase.get(Phrases.GREETING)}. ${this.phrase.get(Phrases.HELP)}`, { delay: 1000 });
       this.say(`${this.phrase.get(Phrases.NAME)}`, { delay: 4000 });
     };
   }
