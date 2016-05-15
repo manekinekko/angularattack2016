@@ -40,9 +40,9 @@ export class Voice {
 
   help() {
     this.say('Ask me how do you look and I will tell you');
-    this.say('Or');
-    this.say('if you need to know what around you just ask');
-    this.say('I can also show you colors');
+    this.say('Or', { delay: 2500 });
+    this.say('if you need to know what around you just ask', { delay: 3000 });
+    this.say('I can also show you colors', { delay: 6000 });
   }
 
   whoAmI() {
