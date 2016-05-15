@@ -13,6 +13,11 @@
       navigator.serviceWorker.register('sw.js');
     }
   </script>
+  <style>
+  body, html {background-color: #2C1B31;}
+  .version {bottom: 0;position: absolute;color: white;right: 0;font-size: 8px;padding: 3px;}
+  .loading {height: 20px;top: 100px;z-index: 999;position: absolute;text-align: center;color: white;width: 100%;}
+  </style>
 
   <link ios-href="build/css/app.ios.css" rel="stylesheet">
   <link md-href="build/css/app.md.css" rel="stylesheet">
@@ -21,7 +26,9 @@
 </head>
 
 <body>
-  <ion-app></ion-app>
+  <ion-app>
+    <span class="loading">Loading content...</span>
+  </ion-app>
   <span class="version">v1.1.14</span>
 
   <!-- cordova.js required for cordova apps -->
