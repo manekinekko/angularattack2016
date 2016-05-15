@@ -3,6 +3,7 @@ import {Page} from 'ionic-angular';
 import {Speech} from '../../services/speech';
 import {Vision, FEATURE_TYPE} from '../../services/vision';
 import {Voice} from '../../services/voice';
+import {Phrase, Phrases} from '../../services/phrase';
 import {CameraComponent} from '../../components/camera/camera';
 import {AngieComponent} from '../../components/angie/angie';
 
@@ -22,6 +23,7 @@ export class HomePage {
     private speech: Speech,
     private vision: Vision,
     private voice: Voice,
+    private phrase: Phrase,
     private elementRef: ElementRef,
     private renderer: Renderer
   ) {
@@ -80,7 +82,7 @@ export class HomePage {
 
   private describeWhatISee() {
     this.lastCommand = () => {
-      this.voice.say(`Ok ${this.voice.name}. let me check that for you.`);
+      this.voice.say(`${this.phrase.get(Phrases.OK)} ${this.voice.name}. let me check that for you.`);
       this.vision.process(this.camera.getImageAsBase64()).subscribe(
         data => this.voice.say(this.formatText(data.labels), { delay: 2000 }),
         err => console.error(err),
@@ -93,7 +95,7 @@ export class HomePage {
 
   private describeFacial() {
     this.lastCommand = () => {
-      this.voice.say(`Ok ${this.voice.name}. let me describe your face.`);
+      this.voice.say(`${this.phrase.get(Phrases.OK)} ${this.voice.name}. let me describe your face.`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.FACE_DETECTION)
         .subscribe(
         data => this.voice.say(this.formatText(data.face), { delay: 1500 }),
@@ -107,7 +109,7 @@ export class HomePage {
 
   private describeColor() {
     this.lastCommand = () => {
-      this.voice.say(`Ok you need colors. let me analyse it ${this.voice.name}.`);
+      this.voice.say(`${this.phrase.get(Phrases.OK)} you need colors. let me analyse it ${this.voice.name}.`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.IMAGE_PROPERTIES)
         .subscribe(
         data => this.voice.say(`Well ${this.voice.name}, I see mostly ${data.color}`, { delay: 1500 }),

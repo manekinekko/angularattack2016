@@ -1,6 +1,6 @@
-import { Injectable, EventEmitter } from 'angular2/core';
-
+import {Injectable, EventEmitter} from 'angular2/core';
 import * as annyang from 'annyang';
+import {Phrase, Phrases} from './phrase';
 
 const SPEECH_VOICE = 'US English Female';
 
@@ -14,7 +14,9 @@ export class Voice {
   public speaking = new EventEmitter<boolean>();
   public name = '';
 
-  constructor() {
+  constructor(
+    private phrase: Phrase
+  ) {
     if ('responsiveVoice' in window) {
       this.rv = responsiveVoice;
     }
@@ -23,7 +25,7 @@ export class Voice {
   start() {
     this.rv.OnVoiceReady = () => {
       this.rv.setDefaultVoice(SPEECH_VOICE);
-      this.say('Hi. How can I help you?', { delay: 1000 });
+      this.say(`${this.phrase.get(Phrases.GREETING)}. How can I help you?`, { delay: 1000 });
       this.say('What is your name?', { delay: 4000 });
     };
   }
