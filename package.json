@@ -11,6 +11,7 @@
     "angular2": "2.0.0-beta.15",
     "annyang": "^2.4.0",
     "es6-shim": "^0.35.0",
+    "gulp-replace": "0.5.4",
     "ionic-angular": "2.0.0-beta.6",
     "ionic-native": "^1.1.0",
     "ionicons": "3.0.0",

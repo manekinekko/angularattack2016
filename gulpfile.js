@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
+    gulpReplace = require('gulp-replace'),
     del = require('del'),
     runSequence = require('run-sequence'),
     argv = process.argv;
@@ -51,6 +52,7 @@ gulp.task('watch', ['clean'], function(done){
 gulp.task('build', ['clean'], function(done){
   runSequence(
     ['sass', 'html', 'fonts', 'scripts'],
+    'version',
     function(){
       buildBrowserify({
         minify: isRelease,
@@ -63,6 +65,17 @@ gulp.task('build', ['clean'], function(done){
       }).on('end', done);
     }
   );
+});
+
+gulp.task('version', function(callback) {
+  var version = require('./package.json').version;
+  console.log(version);
+  gulp.src('www/index.html')
+    .pipe(gulpReplace(
+      /<span (.*?)>(.*?)<\/span>/,
+      '<span $1>v'+version+'</span>'
+    ))
+    .pipe(gulp.dest('www/'))
 });
 
 gulp.task('sw', function(callback) {

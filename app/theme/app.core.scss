@@ -12,3 +12,12 @@
 body {
   background-color: color($colors, dark);
 }
+
+.version {
+  bottom: 0;
+  position: absolute;
+  color: white;
+  right: 0;
+  font-size: 8px;
+  padding: 3px;
+}
