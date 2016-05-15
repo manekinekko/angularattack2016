@@ -74,7 +74,7 @@ gulp.task('version', function(callback) {
   var version = JSON.parse(require('fs').readFileSync('./package.json')).version;
 
   console.log(version);
-  gulp.src('www/index.html')
+  return gulp.src('www/index.html')
     .pipe(gulpReplace(
       /<span (.*?)>(.*?)<\/span>/,
       '<span $1>v'+version+'</span>'
