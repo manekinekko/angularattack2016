@@ -50,10 +50,27 @@ export class Voice {
   help() {
     if(this.isSpeaking === false) {
       this.say(`
-        Ask me how do you look and I will tell you
-        Or
-        if you need to know what around you just ask
-        I can also show you colors, and read text
+          Here are the commands I can understand:
+
+          'my name is ',
+
+          'let me see', 'show me', '(describe) what do you see',
+
+          'how do I look',
+
+          'tell me colors', 'what color is this',
+
+          'help', 'what should I say',
+
+          'who are you',
+
+          '(can you) read this (for me)', 'read it',
+
+          also, you can say
+
+          'and this', 'and now',
+
+          in order to run the last query.
       `);
     }
   }
