@@ -3,8 +3,8 @@ import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from '
 @Component({
     selector: 'letmesee-camera',
     template: `
-  <canvas width='1280' height='720' #canvas></canvas>
-  <video width='1280' height='720' #video preload='auto' autoplay></video>
+  <canvas [width]='cameraConstraints.width.ideal' [height]='cameraConstraints.height.ideal' #canvas></canvas>
+  <video [width]='cameraConstraints.width.ideal' [height]='cameraConstraints.height.ideal' #video preload='auto' autoplay></video>
   `
 })
 export class CameraComponent {
@@ -15,6 +15,11 @@ export class CameraComponent {
   @Output('onDimensionUpdate') dimensionUpdated = new EventEmitter<any>();
 
   private nativeCanvas: any;
+
+  private cameraConstraints = {
+    width: { min: 1024, ideal: 1280, max: 1920 },
+    height: { min: 776, ideal: 720, max: 1080 }
+  };
 
   constructor(
     private elementRef: ElementRef,
@@ -33,7 +38,7 @@ export class CameraComponent {
 
     if (navigator.getUserMedia) {
       navigator.getUserMedia(
-        { video: { width: 1280, height: 720 } },
+        { video: true },
         (stream) => videoNative.src = window.URL.createObjectURL(stream),
         (e) => console.log('failed', e)
       );
@@ -54,7 +59,7 @@ export class CameraComponent {
         self.nativeCanvas.width = Math.min(window.innerWidth, vw);
         self.nativeCanvas.height = vh;
 
-        self.dimensionUpdated.emit({vw, vh});
+        self.dimensionUpdated.emit({vw:self.nativeCanvas.width, vh});
 
     }, false);
     videoNative.addEventListener('play', draw, false);
