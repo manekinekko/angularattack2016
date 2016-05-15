@@ -63,4 +63,4 @@ https://angularlabs.2016.angularattack.io/
 
 <img alt="Wassim Chegham" src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/wassim.png?token=ABnuHfl82e7j7lIYyL4w0wo7xWJT-Fi7ks5XQiJ1wA%3D%3D" width="280px"  />
 <img alt="Attila Csanyi" src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/attila.png?token=ABnuHTrVVbJ6bnNdY8sBMtG3JnK6nrhnks5XQh4zwA%3D%3D" width="280px"  />
-<img alt="Uri Shaked" src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/urish.png?token=ABnuHTrVVbJ6bnNdY8sBMtG3JnK6nrhnks5XQh4zwA%3D%3D" width="280px"  />
+<img alt="Uri Shaked" src="www/images/urish.png" width="280px"  />
