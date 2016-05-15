@@ -4,7 +4,7 @@
     "print-version": "gulp version && git add -A && git commit -m 'docs(index.html): update version in index.html' ",
     "git-push": "git push origin master --tags",
     "surge": "surge www",
-    "bump": "npm version patch",
+    "bump": "npm version patch && git add -A && git commit -m 'chore(sw): update sw content'",
     "serve": "ionic serve --address localhost",
     "deploy": "npm run build && npm run bump && npm run print-version && npm run git-push && npm run surge"
   },
