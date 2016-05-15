@@ -15,6 +15,7 @@ export class HomePage {
 
   @ViewChild(CameraComponent) camera: CameraComponent;
   @ViewChild('card') card;
+  @ViewChild('easter') easter;
 
   private lastCommand: Function;
   private angieSpeaking: boolean = false;
@@ -79,6 +80,10 @@ export class HomePage {
         'read it',
         () => setTimeout(this.describeText.bind(this), 1000)
       ])
+      .addCommands([
+        'a filter which is a pipe filter',
+        () => this.playAudio()
+      ])
       .start();
   }
 
@@ -96,7 +101,7 @@ export class HomePage {
       this.vision.process(this.camera.getImageAsBase64()).subscribe(
         data => this.voice.say(this.formatText(data.labels), { delay: 2000 }),
         err => console.error(err),
-        () => console.log('done')
+        () => {}
       );
     };
 
@@ -110,7 +115,7 @@ export class HomePage {
         .subscribe(
         data => this.voice.say(this.formatText(data.face), { delay: 1500 }),
         err => console.error(err),
-        () => console.log('done')
+        () => {}
         );
     };
 
@@ -124,7 +129,7 @@ export class HomePage {
         .subscribe(
         data => this.voice.say(`Well ${this.voice.name}, I see mostly ${data.color}`, { delay: 1500 }),
         err => console.error(err),
-        () => console.log('done')
+        () => {}
         );
     };
 
@@ -138,7 +143,7 @@ export class HomePage {
         .subscribe(
         data => this.voice.say(this.formatText(data.text, 'Here is the extracted text:'), { delay: 2000 }),
         err => console.error(err),
-        () => console.log('done')
+        () => {}
         );
     };
 
@@ -150,12 +155,14 @@ export class HomePage {
   }
 
   private formatText(data: string[] = [], defaultText: string = 'I see'): string {
-    console.log(data);
-
     let text = `Well ${this.voice.name}, ${defaultText} ${data.join(', ')}`;
     if (data.length === 0) {
       text = `Sorry ${this.voice.name}! I could not recognize what I see.`;
     }
     return text;
+  }
+
+  private playAudio() {
+    this.easter.nativeElement.play();
   }
 }
