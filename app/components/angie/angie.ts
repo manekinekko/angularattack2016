@@ -9,10 +9,12 @@ export class AngieComponent implements OnChanges {
   @Input() speaking: boolean;
   @Output('onTap') tap$: EventEmitter<boolean>;
 
+  public eyebrowsRightUp: boolean = false;
+  public eyebrowsLeftUp: boolean = false;
   private mouthOpen: boolean = false;
   private speakTimer: number;
 
-  constructor(){
+  constructor() {
     this.tap$ = new EventEmitter<boolean>();
   }
 
@@ -33,7 +35,13 @@ export class AngieComponent implements OnChanges {
 
   speak() {
     this.speakTimer = setInterval(() => {
-      this.mouthOpen = !this.mouthOpen;
+      this.mouthOpen = this.randomBool();
+      this.eyebrowsLeftUp = this.randomBool();
+      this.eyebrowsRightUp = this.randomBool();
     }, 200);
+  }
+
+  private randomBool() {
+    return Math.random() < .5;
   }
 }

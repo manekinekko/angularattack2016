@@ -303,20 +303,43 @@
 					      data-colored="false" data-filltype="gradient" data-stroketype="none" data-fromskin="true"
 					      fill="url(#SvgjsRadialGradient2758)" opacity="1"></path>
 				</g>
-				<g id="svga-group-eyebrows-left" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
+				
+				<!-- Left Eyebrows (normal) -->
+				<g id="svga-group-eyebrows-left" *ngIf="!eyebrowsLeftUp" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
 				   data-scaleY="1" data-rotate="0">
 					<path id="SvgjsPath2778"
 					      d="M74.799 69.068c-4.425-0.475-21.252 3.714-21.252 3.714s16.789-6.74 23.757-5.667c5.188 0.798 14.397 5.077 12.706 7.339C88.649 76.275 84.408 70.1 74.799 69.068z"
 					      data-colored="true" data-filltype="#000000" data-stroketype="none" fill="#2C1B31"
 					      stroke-width="none" opacity="1"></path>
 				</g>
-				<g id="svga-group-eyebrows-right" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
+				
+				<!-- Left Eyebrows (upper) -->
+				<g id="svga-group-eyebrows-left" *ngIf="eyebrowsLeftUp" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
+				   data-scaleY="1" data-rotate="0" transform="translate(0, -1)">
+					<path id="SvgjsPath2778"
+					      d="M74.799 69.068c-4.425-0.475-21.252 3.714-21.252 3.714s16.789-6.74 23.757-5.667c5.188 0.798 14.397 5.077 12.706 7.339C88.649 76.275 84.408 70.1 74.799 69.068z"
+					      data-colored="true" data-filltype="#000000" data-stroketype="none" fill="#2C1B31"
+					      stroke-width="none" opacity="1"></path>
+				</g>
+				
+				<!-- Right Eyebrows (normal) -->
+				<g id="svga-group-eyebrows-right" *ngIf="!eyebrowsRightUp" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
 				   data-scaleY="1" data-rotate="0">
 					<path id="SvgjsPath2779"
 					      d="M109.731 74.187c-1.713-2.292 7.592-6.31 13.546-6.804 7.117-0.59 22.914 4.085 22.914 4.085s-15.9-2.628-20.377-2.106C115.998 70.506 111.11 76.031 109.731 74.187z"
 					      data-colored="true" data-filltype="#000000" data-stroketype="none" fill="#2C1B31"
 					      stroke-width="none" opacity="1"></path>
 				</g>
+				
+				<!-- Right Eyebrows (upper) -->
+				<g id="svga-group-eyebrows-right" *ngIf="eyebrowsRightUp" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
+				   data-scaleY="1" data-rotate="0" transform="translate(0, -1)">
+					<path id="SvgjsPath2779"
+					      d="M109.731 74.187c-1.713-2.292 7.592-6.31 13.546-6.804 7.117-0.59 22.914 4.085 22.914 4.085s-15.9-2.628-20.377-2.106C115.998 70.506 111.11 76.031 109.731 74.187z"
+					      data-colored="true" data-filltype="#000000" data-stroketype="none" fill="#2C1B31"
+					      stroke-width="none" opacity="1"></path>
+				</g>
+				
 				<g id="svga-group-nose-single" data-updown="0" data-leftright="0" data-dist="0" data-scaleX="1"
 				   data-scaleY="1" data-rotate="0">
 					<path id="SvgjsPath2890"
