@@ -68,7 +68,11 @@ gulp.task('build', ['clean'], function(done){
 });
 
 gulp.task('version', function(callback) {
-  var version = require('./package.json').version;
+
+  // require('./package.json') caches files so it won't help us here.
+
+  var version = JSON.parse(require('fs').readFileSync('./package.json')).version;
+
   console.log(version);
   gulp.src('www/index.html')
     .pipe(gulpReplace(
