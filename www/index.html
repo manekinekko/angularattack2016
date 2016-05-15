@@ -9,38 +9,34 @@
   <meta name="apple-mobile-web-app-title" content="Let Me See">
   <meta name="application-name" content="Let Me See">
   <meta name="msapplication-TileColor" content="#ffc40d">
-  <meta name="msapplication-config" content="/images/pwa/browserconfig.xml">
+  <meta name="msapplication-config" content="images/pwa/browserconfig.xml">
   <meta name="theme-color" content="#2c1a31">
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="shortcut icon" href="images/pwa/icon.png">
+
   <link rel="apple-touch-icon" sizes="57x57" href="images/pwa/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="images/pwa/apple-touch-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="images/pwa/apple-touch-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76" href="images/pwa/apple-touch-icon-76x76.png">
   <link rel="apple-touch-icon" sizes="114x114" href="images/pwa/apple-touch-icon-114x114.png">
   <link rel="apple-touch-icon" sizes="120x120" href="images/pwa/apple-touch-icon-120x120.png">
-  <link rel="icon" type="image/png" href="images/pwa/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="images/pwa/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="images/pwa/favicon-16x16.png" sizes="16x16">
   <link rel="mask-icon" href="images/pwa/safari-pinned-tab.svg" color="#2c1a31">
   <link rel="shortcut icon" href="images/pwa/favicon.ico">
+  <link rel="manifest" href="manifest.json">
 
-  <script type="text/javascript">
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
-    }
-  </script>
+  <link ios-href="build/css/app.ios.css" rel="stylesheet">
+  <link md-href="build/css/app.md.css" rel="stylesheet">
+  <link wp-href="build/css/app.wp.css" rel="stylesheet">
   <style>
   body, html {background-color: #2C1B31;}
   .version {bottom: 0;position: absolute;color: #FEBB62;right: 0;font-size: 8px;padding: 3px;z-index: 999;}
   .loading {height: 20px;top: 100px;z-index: 999;position: absolute;text-align: center;color: #FEBB62;width: 100%;}
   </style>
 
-  <link ios-href="build/css/app.ios.css" rel="stylesheet">
-  <link md-href="build/css/app.md.css" rel="stylesheet">
-  <link wp-href="build/css/app.wp.css" rel="stylesheet">
-  <link rel="manifest" href="manifest.json">
+  <script type="text/javascript">
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </head>
 
 <body>
