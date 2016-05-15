@@ -2,7 +2,7 @@
 
 ## How to use the app
 
-Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angularattack.io) on your phone or computer. You can ask Angie ([NG](https://www.youtube.com/v/aSFfLVxT5vA&start=46&end=89&version=3)) the following questions:
+Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angularattack.io) on your phone or computer. You can ask Angie ([NG](https://www.youtube.com/v/aSFfLVxT5vA&start=46&end=89&version=3&&autoplay=1&loop=1)) the following questions:
 
 - `let me see`, `show me`, `(describe) what do you see`: Angie will tell you what see can see.
 - `how do I look`: Angie will try to guess what is your face expression.
