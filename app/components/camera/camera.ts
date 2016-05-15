@@ -1,6 +1,11 @@
 import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from 'angular2/core';
 import {Voice} from '../../services/voice';
 
+export let CAMERA_TYPE = {
+  "FRONT": "front",
+  "REAR": "environment"
+};
+
 @Component({
     selector: 'letmesee-camera',
     template: `
@@ -22,36 +27,44 @@ export class CameraComponent {
     height: { min: 776, ideal: 720, max: 1080 }
   };
 
+  private videoSource;
+
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer,
     private voice: Voice
-  ) {}
+  ) {
+    this.videoSource = { facingMode: CAMERA_TYPE.REAR };
+  }
 
   ngAfterViewInit() {
 
     window.URL = window.URL || (<any>window).webkitURL;
+
+    // https://developers.google.com/web/updates/2015/10/media-devices?hl=en#getusermedia
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+    (<any>window).MediaDevices = (<any>window).MediaDevices || navigator.getUserMedia;
 
     this.nativeCanvas = this.canvas.nativeElement;
     let context = this.nativeCanvas.getContext('2d');
     let videoNative = this.video.nativeElement;
     let vw, vh;
 
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia(
-        { video: true },
-        (stream) => videoNative.src = window.URL.createObjectURL(stream),
-        (e) => console.log('failed', e)
-      );
+    if ('MediaDevices' in window || navigator.getUserMedia) {
 
       navigator.mediaDevices.enumerateDevices()
         .then((devices) => {
-          let cameras = devices
+          return devices
             .filter( (device) => device.kind === 'videoinput' );
+        })
+        .then( (devices) => {
 
-          this.voice.sayDelay(`Hey, I found ${cameras.length} cameras`);
-          // console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
+          navigator.getUserMedia(
+            { video: this.figureOutWhichCameraToUse(devices) },
+            (stream) => videoNative.src = window.URL.createObjectURL(stream),
+            (e) => console.log('failed', e)
+          );
+
         })
         .catch((err) => {
           console.log(err.name + ": " + err.message);
@@ -77,6 +90,13 @@ export class CameraComponent {
 
     }, false);
     videoNative.addEventListener('play', draw, false);
+  }
+
+  private figureOutWhichCameraToUse(devices) {
+    devices.forEach(device => {
+      console.log(device.kind + ": " + device.label + " id = " + device.deviceId);  
+    });
+    return true;
   }
 
   getImageAsBase64() {
