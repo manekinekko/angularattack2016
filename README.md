@@ -49,51 +49,14 @@ $ npm run deploy
 ```
 https://angularlabs.2016.angularattack.io/
 ```
+## The team
 
-# This is your [AngularAttack](https://www.angularattack.com) 2016 Repo
+*from left to right*
 
-This repo is the start of your AngularAttack 2016 entry. It contains the simple [Angular2 starter](https://angular.io/docs/ts/latest/quickstart.html) files.
+- Wassim Chegham ([manekinekko](https://github.com/manekinekko))
+- Attila Csanyi ([attilacsanyi](https://github.com/attilacsanyi))
+- Uri Shaked ([urish](https://github.com/urish))
 
-**DO NOT MAKE ANY CODE CHECKINS TO THIS REPOSITORY BEFORE THE COMPETITION OFFICIALLY BEGINS.**
-
-**DOING SO COULD DISQUALIFY YOU.**
-
-
-However, before the competition starts, there are some things we encourage you to do to get prepared for the competition.
-
-
-### Step 1) Get Your Local Environment setup
-
-Clone this repo locally, and make sure all your team members have access to it.
-
-* Install the latest [Node / NPM](https://nodejs.org).
-
-* `git clone git@github.com:rumblex/angularattack2016-angularlabs.git`
-
-* `cd angularattack2016-angularlabs`
-
-* `npm install`
-
-* `npm start` will start the server locally to test that everything is running correctly
-
-
-### Step 2) Deploy Your App
-
-While you can't make any checkins before the comp, what you **can** do right now is deploy this sample app to [Surge](https://surge.sh) (our competition hosting provider).
-
-* `npm install -g surge`
-
-* `surge .`
-
-Note: please do not remove the `CNAME` file, as that tells it where to deploy to.
-
-If you receive an error message `"You do not have permission to publish to angularlabs.2016.angularattack.io"`, it might mean another team member has already deployed your project to Surge. Ask them to run the next step to give you access.
-
-### Step 3) Add Your Team Members to Surge
-
-* `surge . --add github@wassimchegham.com,uri@salsa4fun.co.il,attila.csnyi@yahoo.co.uk,gerard.sans@gmail.com`
-
-
-### Step 4) Wait til competition starts
-
-It begins at exactly [May 14 at 00:00 UTC](https://www.wolframalpha.com/input/?i=May+14,+2016+0:00+UTC). Once the competition starts,   you can write over this project.
+<img alt="Wassim Chegham" src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/wassim.png?token=ABnuHfl82e7j7lIYyL4w0wo7xWJT-Fi7ks5XQiJ1wA%3D%3D" width="280px"  />
+<img alt="Attila Csanyi" src="https://raw.githubusercontent.com/rumblex/angularattack2016-angularlabs/master/www/images/attila.png?token=ABnuHTrVVbJ6bnNdY8sBMtG3JnK6nrhnks5XQh4zwA%3D%3D" width="280px"  />
+<img alt="Uri Shaked" src="" width="280px"  />
