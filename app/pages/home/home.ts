@@ -79,10 +79,6 @@ export class HomePage {
         'read it',
         () => setTimeout(this.describeText.bind(this), 1000)
       ])
-      .addCommands([
-        ':blah',
-        (blah) => this.voice.sorry(blah)
-      ])
       .start();
   }
 
