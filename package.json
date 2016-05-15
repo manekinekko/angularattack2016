@@ -5,7 +5,7 @@
     "surge": "surge www",
     "bump": "npm version patch",
     "serve": "ionic serve --address localhost",
-    "deploy": "npm run build && npm run bump && npm run git-push && npm run surge"
+    "deploy": "npm run build && npm run bump && npm run git-push ##&& npm run surge"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.15",
