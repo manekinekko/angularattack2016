@@ -20,8 +20,10 @@ Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angu
 $ # 1) use this command to serve your local dev in your browser (with livereload support)
 $
 $ npm run serve
+$
+$ # 1.1) push your updates to git (as usual, with your favorit tool)
 $ 
-$ # 2) build the browser version of the app
+$ # 2) when ready, build the browser version of the app
 $ 
 $ npm run build
 $ 
