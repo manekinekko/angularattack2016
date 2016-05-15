@@ -2,7 +2,8 @@ import {Injectable} from 'angular2/core';
 
 export enum Phrases {
     OK,
-    GREETING
+    GREETING,
+    NAME
 }
 
 const DICTIONARY = {
@@ -11,6 +12,9 @@ const DICTIONARY = {
     ],
     "GREETING": [
         'Hi', 'Hello', 'Welcome'
+    ],
+    "NAME": [
+        'What is your name?', 'Who are you?'
     ]
 }
 
