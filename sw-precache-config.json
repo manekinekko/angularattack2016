@@ -6,7 +6,7 @@
     "www/**/*.{ttf,woff,woff2,eof}",
     "www/**/*.js",
     "www/**/*.html",
-    "www/**/*.{png,jpg,gif,svg}",
+    "www/**/*.{png,jpg,gif,svg,mp3}",
     "https://code.responsivevoice.org/responsivevoice.js"
   ],
   "handleFetch": true,
