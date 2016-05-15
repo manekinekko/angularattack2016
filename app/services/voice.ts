@@ -38,11 +38,16 @@ export class Voice {
     };
   }
 
+  /**
+   * push some text to be spoken later.
+   */
   sayDelay(text: string) {
-    console.log('pushing text', text);
     this.q.push(text);
   }
 
+  /**
+   * text to voice.
+   */
   say(text: string, options: any = {}) {
     options.delay = options.delay || 0;
     setTimeout(() => {

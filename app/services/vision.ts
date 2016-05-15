@@ -1,7 +1,6 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import {COLORS} from './colors-dictionary';
-import {Levenshtein} from './algorithms';
 
 import 'rxjs/add/operator/map';
 
@@ -21,9 +20,16 @@ export class Vision {
 
   private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAxtYY-XwspbDUGYF21aqSlFxTnI8EGzbw';
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
+  /**
+   * Process the user's query.
+   * Available queries:
+   * - LABEL_DETECTION  : for generic label extraction (default)
+   * - FACE_DETECTION   : for facial expression
+   * - TEXT_DETECTION   : for OCR text
+   * - IMAGE_PROPERTIES : for dominant color extraction
+   */
   process(base64: string, feature: string = FEATURE_TYPE.LABEL_DETECTION) {
     let request: any = {
       requests: [{
@@ -39,6 +45,9 @@ export class Vision {
     return this.post(request);
   }
 
+  /**
+   * Send the request to the Google Vision API endpoint.
+   */
   private post(request: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -48,6 +57,9 @@ export class Vision {
       .map(res => this.processMetadata(res));
   }
 
+  /**
+   * Process the response result from the Vision endpoint.
+   */
   private processMetadata(data: any): any[] | any {
 
     data.responses = data.responses || {};
@@ -94,6 +106,9 @@ export class Vision {
     return [];
   }
 
+  /**
+   * Find the nearest color name based on the RGB color extracted from the image.
+   */
   private findNearestColorName(color: IRGBColor): string {
     return COLORS[
       Object
@@ -106,6 +121,9 @@ export class Vision {
     ];
   }
 
+  /**
+   * Convert HEX color to RGB values
+   */
   private hexToRgb(hex: string): IRGBColor {
     return {
       red: parseInt(hex.substr(0, 2), 16),
@@ -114,6 +132,9 @@ export class Vision {
     };
   }
 
+  /**
+   * Compute the distance between two RGB colors
+   */
   private colorDistance(left: IRGBColor, right: IRGBColor): number {
     return Math.abs(left.red - right.red) + Math.abs(left.green - right.green) + Math.abs(left.blue - right.blue);
   }
