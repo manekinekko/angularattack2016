@@ -1,6 +1,6 @@
 {
   "firebase": "letmesee",
-  "public": ".",
+  "public": "www/",
   "ignore": [
     "firebase.json",
     "**/.*",
