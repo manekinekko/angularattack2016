@@ -6,7 +6,7 @@
 
 ## How to use the app
 
-Go the [https://angularlabs.2016.angularattack.io](https://angularlabs.2016.angularattack.io) on your phone or computer. You can ask Angie ([NG](https://www.youtube.com/v/aSFfLVxT5vA&start=46&end=89&version=3&&autoplay=1&loop=1)) the following questions:
+Go the [https://letmesee.firebaseapp.com](https://letmesee.firebaseapp.com) on your phone or computer. You can ask Angie ([NG](https://www.youtube.com/v/aSFfLVxT5vA&start=46&end=89&version=3&&autoplay=1&loop=1)) the following questions:
 
 - `my name is [name], i am [name]`: Angie will remember your name.
 - `who are you`: Angie will introduce herself.
@@ -51,7 +51,7 @@ $ npm run deploy
 ## Access the `https` deployed app (not http)
 
 ```
-https://angularlabs.2016.angularattack.io/
+https://letmesee.firebaseapp.com
 ```
 ## The team
 
