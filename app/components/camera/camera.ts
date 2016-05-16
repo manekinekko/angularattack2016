@@ -42,9 +42,8 @@ export class CameraComponent {
     window.URL = window.URL || (<any>window).webkitURL;
 
     // https://developers.google.com/web/updates/2015/10/media-devices?hl=en#getusermedia
-    (<any>window).MediaDevices = (<any>window).MediaDevices || navigator.getUserMedia;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-
+    (<any>window).MediaDevices = (<any>window).MediaDevices || navigator.getUserMedia;
 
     this.nativeCanvas = this.canvas.nativeElement;
     let context = this.nativeCanvas.getContext('2d');
