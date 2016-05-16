@@ -42,15 +42,16 @@ export class CameraComponent {
     window.URL = window.URL || (<any>window).webkitURL;
 
     // https://developers.google.com/web/updates/2015/10/media-devices?hl=en#getusermedia
-    //(<any>window).MediaDevices = (<any>window).MediaDevices || navigator.getUserMedia;
+    (<any>window).MediaDevices = (<any>window).MediaDevices || navigator.getUserMedia;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
 
     this.nativeCanvas = this.canvas.nativeElement;
     let context = this.nativeCanvas.getContext('2d');
     let videoNative = this.video.nativeElement;
     let vw, vh;
 
-    if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+    if ('MediaDevices' in window || navigator.getUserMedia) {
 
       navigator.mediaDevices.enumerateDevices()
         .then((devices) => {
@@ -59,21 +60,16 @@ export class CameraComponent {
         })
         .then( (devices) => {
 
-          if(navigator.getUserMedia) {
-            navigator.getUserMedia(
-              { video: this.figureOutWhichCameraToUse(devices) },
-              (stream) => videoNative.src = window.URL.createObjectURL(stream),
-              (e) => console.log('failed', e)
-            );
-          }
+          navigator.getUserMedia(
+            { video: this.figureOutWhichCameraToUse(devices) },
+            (stream) => videoNative.src = window.URL.createObjectURL(stream),
+            (e) => console.log('failed', e)
+          );
 
         })
         .catch((err) => {
           console.log(err.name + ": " + err.message);
         });
-    }
-    else {
-      console.log("enumerateDevices() not supported.");
     }
 
     let draw = () => {

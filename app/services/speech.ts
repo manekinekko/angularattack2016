@@ -30,6 +30,7 @@ export class Speech {
 
     if(annyang) {
       this.commands.forEach(annyang.addCommands);
+      annyang.debug();
       annyang.start({ continuous: true });
     }
     else {
