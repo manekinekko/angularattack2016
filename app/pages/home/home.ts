@@ -114,7 +114,7 @@ export class HomePage {
       this.voice.say(`${this.phrase.get(Phrases.OK)} ${this.voice.name}. ${this.phrase.get(Phrases.LOOKUP_FACE)}`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.FACE_DETECTION)
         .subscribe(
-        data => this.voice.say(this.formatText(data.face), { delay: 1500 }),
+        data => this.voice.say(this.formatText(data.face), { delay: 2000 }),
         err => console.error(err),
         () => {}
         );
@@ -128,7 +128,7 @@ export class HomePage {
       this.voice.say(`${this.phrase.get(Phrases.OK)} you need colors. ${this.phrase.get(Phrases.LOOKUP_COLOR)} ${this.voice.name}.`);
       this.vision.process(this.camera.getImageAsBase64(), FEATURE_TYPE.IMAGE_PROPERTIES)
         .subscribe(
-        data => this.voice.say(`Well ${this.voice.name}, I see mostly ${data.color}`, { delay: 1500 }),
+        data => this.voice.say(`Well ${this.voice.name}, I see mostly ${data.color}`, { delay: 2000 }),
         err => console.error(err),
         () => {}
         );
