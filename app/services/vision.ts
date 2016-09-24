@@ -1,8 +1,13 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {COLORS} from './colors-dictionary';
-
 import 'rxjs/add/operator/map';
+
+interface IRGBColor {
+  red: number;
+  green: number;
+  blue: number;
+}
 
 export const FEATURE_TYPE = {
   'TYPE_UNSPECIFIED': 'TYPE_UNSPECIFIED',

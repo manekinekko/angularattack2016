@@ -14,8 +14,7 @@ import { Phrase } from './services/phrase';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [Vision, Speech, Voice, Phrase],
-  config: {}
+  providers: [Vision, Speech, Voice, Phrase]
 })
 export class MyApp {
 
