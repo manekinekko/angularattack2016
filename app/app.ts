@@ -1,10 +1,10 @@
 
 import { Component } from '@angular/core';
+import { Vibration } from 'ionic-native';
 import {
   Platform,
-  ionicBootstrap,
-  Vibration
-} from 'ionic-native';
+  ionicBootstrap
+} from 'ionic-angular';
 
 import { HomePage } from './pages/home/home';
 import { Voice } from './services/voice';
