@@ -1,4 +1,4 @@
-import {Inject, ViewChild, ElementRef, Renderer} from 'angular2/core';
+import {Inject, ViewChild, ElementRef, Renderer} from '@angular/core';
 import {Page} from 'ionic-angular';
 import {Speech} from '../../services/speech';
 import {Vision, FEATURE_TYPE} from '../../services/vision';
