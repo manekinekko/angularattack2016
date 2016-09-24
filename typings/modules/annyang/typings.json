@@ -1,0 +1,12 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/theluk/typed-annyang/bcd191374316617db56f4737874e520a93ab6bf9/typings.json",
+    "raw": "registry:npm/annyang#2.4.0+20160507185443",
+    "main": "index.d.ts",
+    "version": "2.4.0",
+    "global": false,
+    "name": "annyang",
+    "type": "typings"
+  }
+}

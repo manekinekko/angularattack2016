@@ -1,7 +1,10 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "annyang": "registry:npm/annyang#2.4.0+20160507185443"
+  },
   "devDependencies": {},
   "globalDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
+    "webrtc/mediastream": "registry:dt/webrtc/mediastream#0.0.0+20160317120654"
   }
 }
