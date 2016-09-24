@@ -36,6 +36,7 @@
     "ionic-gulp-html-copy": "1.0.0",
     "ionic-gulp-sass-build": "1.0.0",
     "ionic-gulp-scripts-copy": "2.0.0",
+    "ionic-gulp-tslint": "1.1.0",
     "run-sequence": "1.1.5",
     "sw-precache": "4.1.0",
     "tslint-ionic-rules": "0.0.4"
