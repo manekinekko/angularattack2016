@@ -1,4 +1,4 @@
-import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from 'angular2/core';
+import {Component, ViewChild, Renderer, ElementRef, Output, EventEmitter} from '@angular/core';
 import {Voice} from '../../services/voice';
 
 export let CAMERA_TYPE = {
