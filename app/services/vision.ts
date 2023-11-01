@@ -22,7 +22,7 @@ export const FEATURE_TYPE = {
 
 @Injectable()
 export class Vision {
-  private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAx4PXdKcogPv8NUxs_Zk1frPBpIPK1vcc';
+  private VISION_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate?key={{YOUR_KEY}}';
 
   constructor(private http: Http) {}
 
